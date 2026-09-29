@@ -28,6 +28,8 @@ import { Route as ProductsRouteImport } from './routes/products'
 import { Route as PromotionsRouteImport } from './routes/promotions'
 import { Route as QuotesRouteImport } from './routes/quotes'
 import { Route as ReferencesRouteImport } from './routes/references'
+import { Route as ReportingRouteImport } from './routes/reporting'
+import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as SolutionsRouteImport } from './routes/solutions'
 import { Route as UsersRouteImport } from './routes/users'
 import { Route as ClientsIdRouteImport } from './routes/clients.$id'
@@ -130,6 +132,16 @@ const ReferencesRoute = ReferencesRouteImport.update({
   path: '/references',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ReportingRoute = ReportingRouteImport.update({
+  id: '/reporting',
+  path: '/reporting',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SolutionsRoute = SolutionsRouteImport.update({
   id: '/solutions',
   path: '/solutions',
@@ -181,6 +193,8 @@ export interface FileRoutesByFullPath {
   '/promotions': typeof PromotionsRoute
   '/quotes': typeof QuotesRouteWithChildren
   '/references': typeof ReferencesRoute
+  '/reporting': typeof ReportingRoute
+  '/settings': typeof SettingsRoute
   '/solutions': typeof SolutionsRoute
   '/users': typeof UsersRoute
   '/clients/$id': typeof ClientsIdRoute
@@ -208,6 +222,8 @@ export interface FileRoutesByTo {
   '/promotions': typeof PromotionsRoute
   '/quotes': typeof QuotesRouteWithChildren
   '/references': typeof ReferencesRoute
+  '/reporting': typeof ReportingRoute
+  '/settings': typeof SettingsRoute
   '/solutions': typeof SolutionsRoute
   '/users': typeof UsersRoute
   '/clients/$id': typeof ClientsIdRoute
@@ -236,6 +252,8 @@ export interface FileRoutesById {
   '/promotions': typeof PromotionsRoute
   '/quotes': typeof QuotesRouteWithChildren
   '/references': typeof ReferencesRoute
+  '/reporting': typeof ReportingRoute
+  '/settings': typeof SettingsRoute
   '/solutions': typeof SolutionsRoute
   '/users': typeof UsersRoute
   '/clients/$id': typeof ClientsIdRoute
@@ -265,6 +283,8 @@ export interface FileRouteTypes {
     | '/promotions'
     | '/quotes'
     | '/references'
+    | '/reporting'
+    | '/settings'
     | '/solutions'
     | '/users'
     | '/clients/$id'
@@ -292,6 +312,8 @@ export interface FileRouteTypes {
     | '/promotions'
     | '/quotes'
     | '/references'
+    | '/reporting'
+    | '/settings'
     | '/solutions'
     | '/users'
     | '/clients/$id'
@@ -319,6 +341,8 @@ export interface FileRouteTypes {
     | '/promotions'
     | '/quotes'
     | '/references'
+    | '/reporting'
+    | '/settings'
     | '/solutions'
     | '/users'
     | '/clients/$id'
@@ -347,6 +371,8 @@ export interface RootRouteChildren {
   PromotionsRoute: typeof PromotionsRoute
   QuotesRoute: typeof QuotesRouteWithChildren
   ReferencesRoute: typeof ReferencesRoute
+  ReportingRoute: typeof ReportingRoute
+  SettingsRoute: typeof SettingsRoute
   SolutionsRoute: typeof SolutionsRoute
   UsersRoute: typeof UsersRoute
 }
@@ -486,6 +512,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ReferencesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/reporting': {
+      id: '/reporting'
+      path: '/reporting'
+      fullPath: '/reporting'
+      preLoaderRoute: typeof ReportingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/solutions': {
       id: '/solutions'
       path: '/solutions'
@@ -596,6 +636,8 @@ const rootRouteChildren: RootRouteChildren = {
   PromotionsRoute: PromotionsRoute,
   QuotesRoute: QuotesRouteWithChildren,
   ReferencesRoute: ReferencesRoute,
+  ReportingRoute: ReportingRoute,
+  SettingsRoute: SettingsRoute,
   SolutionsRoute: SolutionsRoute,
   UsersRoute: UsersRoute,
 }
