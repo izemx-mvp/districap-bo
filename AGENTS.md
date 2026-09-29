@@ -14,3 +14,5 @@
 - All back-office data lives in `src/lib/mock-data.ts` and is mutated through the localStorage-backed context in `src/lib/store.tsx`; no backend is used because this is a front-end-only demo.
 - Every admin page is a route under `src/routes/` wrapped in `AppShell`, which also enforces the demo auth guard, so navigation and access stay consistent.
 - Lists reuse `src/components/data-table.tsx` and page chrome reuses `src/components/ui-bits.tsx` to keep search, filters, and headers identical across modules.
+- Modules with a detail page use `X.index.tsx` (list, route "/X/") + `X.$id.tsx` (detail); a plain `X.tsx` would become a parent without `<Outlet />` and hide detail pages.
+- Global "Créer" menu opens create forms via `?new=true` (and client edit via `?edit=<id>`), handled by `src/lib/use-open-on-new.ts`; exports use `src/lib/export.ts` (real CSV download).
