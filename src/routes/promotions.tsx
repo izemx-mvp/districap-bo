@@ -1,3 +1,4 @@
+import { useOpenOnNew } from "@/lib/use-open-on-new";
 import { useEffect, useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { CalendarClock, Copy, MoreHorizontal, Pause, Play, Plus, Timer } from "lucide-react";
@@ -88,6 +89,7 @@ function PromotionsPage() {
   const { confirm, dialog } = useConfirm();
   const [editing, setEditing] = useState<Promotion | null>(null);
   const [isNew, setIsNew] = useState(false);
+  useOpenOnNew(() => { setEditing(empty()); setIsNew(true); });
   const [showProducts, setShowProducts] = useState<Promotion | null>(null);
 
   const save = () => {

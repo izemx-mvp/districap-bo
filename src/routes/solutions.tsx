@@ -1,3 +1,4 @@
+import { useOpenOnNew } from "@/lib/use-open-on-new";
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Copy, Eye, MoreHorizontal, Plus } from "lucide-react";
@@ -74,6 +75,7 @@ function SolutionsPage() {
   const { confirm, dialog } = useConfirm();
   const [editing, setEditing] = useState<Solution | null>(null);
   const [isNew, setIsNew] = useState(false);
+  useOpenOnNew(() => { setEditing(empty()); setIsNew(true); });
   const [preview, setPreview] = useState<Solution | null>(null);
 
   const save = () => {

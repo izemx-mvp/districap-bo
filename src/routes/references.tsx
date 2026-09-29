@@ -1,3 +1,4 @@
+import { useOpenOnNew } from "@/lib/use-open-on-new";
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { MoreHorizontal, Plus, Star } from "lucide-react";
@@ -57,6 +58,7 @@ function ReferencesPage() {
   const { confirm, dialog } = useConfirm();
   const [editing, setEditing] = useState<Reference | null>(null);
   const [isNew, setIsNew] = useState(false);
+  useOpenOnNew(() => { setEditing(empty()); setIsNew(true); });
 
   const sectors = [...new Set(store.references.map((r) => r.sector))];
   const years = [...new Set(store.references.map((r) => String(r.year)))];

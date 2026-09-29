@@ -1,3 +1,4 @@
+import { useOpenOnNew } from "@/lib/use-open-on-new";
 import { exportCSV } from "@/lib/export";
 import { useState } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
@@ -63,6 +64,7 @@ function ClientsPage() {
   const store = useStore();
   const navigate = useNavigate();
   const [editing, setEditing] = useState<Client | null>(null);
+  useOpenOnNew(() => { setEditing(empty()); });
 
   const cities = [...new Set(store.clients.map((c) => c.city))];
 

@@ -1,3 +1,4 @@
+import { useOpenOnNew } from "@/lib/use-open-on-new";
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { MoreHorizontal, Plus } from "lucide-react";
@@ -52,6 +53,7 @@ function NewsPage() {
   const { confirm, dialog } = useConfirm();
   const [editing, setEditing] = useState<NewsItem | null>(null);
   const [isNew, setIsNew] = useState(false);
+  useOpenOnNew(() => { setEditing(empty()); setIsNew(true); });
 
   const columns: Column<NewsItem>[] = [
     { key: "title", label: "Titre", value: (n) => n.title, sortable: true, render: (n) => <span className="font-medium">{n.title}</span> },
