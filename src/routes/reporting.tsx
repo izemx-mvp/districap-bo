@@ -1,3 +1,4 @@
+import { exportCSV } from "@/lib/export";
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import {
@@ -96,7 +97,7 @@ function ReportingPage() {
                 ))}
               </SelectContent>
             </Select>
-            <Button variant="outline" onClick={() => toast.success("Rapport exporté en PDF")}>
+            <Button variant="outline" onClick={() => { toast.success("Rapport prêt — utilisez « Enregistrer en PDF »"); setTimeout(() => window.print(), 300); }}>
               <Download className="size-4" /> Exporter
             </Button>
           </>

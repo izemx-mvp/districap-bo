@@ -1,3 +1,4 @@
+import { exportCSV } from "@/lib/export";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Download, Eye, MoreHorizontal, UserCheck } from "lucide-react";
 import { toast } from "sonner";
@@ -98,7 +99,7 @@ function QuotesPage() {
         title="Demandes de devis"
         description={`${store.quotes.length} demandes centralisées depuis les deux sites.`}
         actions={
-          <Button variant="outline" onClick={() => toast.success("Export des devis généré")}>
+          <Button variant="outline" onClick={() => exportCSV("devis", store.quotes.map(({ history, notes, ...q }) => q), "Export des devis généré")}>
             <Download className="size-4" /> Exporter
           </Button>
         }

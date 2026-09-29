@@ -1,3 +1,6 @@
+import { useNavigate } from "@tanstack/react-router";
+import { newId } from "@/lib/store";
+import type { Quote as QuoteT } from "@/lib/mock-data";
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Mail, MoreHorizontal, Reply } from "lucide-react";
@@ -38,6 +41,7 @@ function FormsPage() {
   const { confirm, dialog } = useConfirm();
   const [detail, setDetail] = useState<FormEntry | null>(null);
   const [reply, setReply] = useState("");
+  const navigate = useNavigate();
 
   const unread = store.formEntries.filter((f) => !f.read).length;
 
@@ -120,7 +124,7 @@ function FormsPage() {
               <DropdownMenuItem onClick={() => { store.update("formEntries", f.id, { read: !f.read }); toast.success("Statut mis à jour"); }}>
                 {f.read ? "Marquer comme non lue" : "Marquer comme lue"}
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => toast.success(`Demande transférée à l'équipe commerciale`)}>Transférer</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => { store.logActivity("a transféré la demande de", "Formulaires", f.name, "/forms"); toast.success(`Demande transférée à l'équipe commerciale`); }}>Transférer</DropdownMenuItem>
               <DropdownMenuItem variant="destructive" onClick={() => confirm("Supprimer la demande ?", `La demande de ${f.name} sera supprimée.`, () => { store.remove("formEntries", f.id); toast.success("Demande supprimée"); })}>Supprimer</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
@@ -157,7 +161,23 @@ function FormsPage() {
             >
               <Reply className="size-4" /> Envoyer la réponse
             </Button>
-            <Button variant="outline" onClick={() => toast.success("Demande convertie en devis")}>
+            <Button variant="outline" onClick={() => {
+                if (!detail) return;
+                const today = new Date().toISOString().slice(0, 10);
+                const qid = newId("q");
+                store.add("quotes", {
+                  id: qid,
+                  number: `DV-${new Date().getFullYear()}-${String(store.quotes.length + 1).padStart(4, "0")}`,
+                  date: today, contact: detail.name, company: detail.company, phone: detail.phone, email: detail.email,
+                  source: detail.source, subject: detail.form, assignee: null, status: "Nouveau", message: detail.message,
+                  lines: [], attachments: [], notes: [],
+                  history: [{ label: `Créé depuis le formulaire « ${detail.form} »`, date: today, author: store.session?.name ?? "Vous" }],
+                } as QuoteT);
+                store.update("formEntries", detail.id, { read: true });
+                store.logActivity("a converti en devis la demande de", "Devis", detail.name, `/quotes/${qid}`);
+                toast.success("Demande convertie en devis", { action: { label: "Ouvrir", onClick: () => navigate({ to: "/quotes/$id", params: { id: qid } }) } });
+                setDetail(null);
+              }}>
               <Mail className="size-4" /> Convertir en devis
             </Button>
           </DialogFooter>

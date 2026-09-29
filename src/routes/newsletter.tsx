@@ -1,3 +1,4 @@
+import { exportCSV } from "@/lib/export";
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Download, MoreHorizontal, Plus, Send } from "lucide-react";
@@ -68,7 +69,7 @@ function NewsletterPage() {
         description={`${active} abonnés actifs et ${store.campaigns.length} campagnes.`}
         actions={
           <>
-            <Button variant="outline" onClick={() => toast.success("Liste des abonnés exportée")}>
+            <Button variant="outline" onClick={() => exportCSV("abonnes-newsletter", store.subscribers, "Liste des abonnés exportée")}>
               <Download className="size-4" /> Exporter les abonnés
             </Button>
             <Button onClick={() => setOpen(true)}><Plus className="size-4" /> Nouvelle campagne</Button>

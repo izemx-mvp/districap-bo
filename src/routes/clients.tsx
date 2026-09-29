@@ -1,3 +1,4 @@
+import { exportCSV } from "@/lib/export";
 import { useState } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Download, MoreHorizontal, Plus } from "lucide-react";
@@ -85,7 +86,7 @@ function ClientsPage() {
         description={`${store.clients.length} clients enregistrés sur les deux plateformes.`}
         actions={
           <>
-            <Button variant="outline" onClick={() => toast.success("Base clients exportée")}>
+            <Button variant="outline" onClick={() => exportCSV("clients", store.clients, "Base clients exportée")}>
               <Download className="size-4" /> Exporter
             </Button>
             <Button onClick={() => setEditing(empty())}>
@@ -117,7 +118,7 @@ function ClientsPage() {
               <DropdownMenuItem onClick={() => { store.update("clients", c.id, { status: c.status === "actif" ? "inactif" : "actif" }); toast.success("Statut mis à jour"); }}>
                 {c.status === "actif" ? "Désactiver" : "Activer"}
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => toast.success("Fiche client exportée")}>Exporter</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => exportCSV(`client-${c.id}`, [c], "Fiche client exportée")}>Exporter</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         )}

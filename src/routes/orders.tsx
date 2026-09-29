@@ -1,3 +1,4 @@
+import { exportCSV } from "@/lib/export";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Download, Eye, MoreHorizontal, Printer } from "lucide-react";
 import { toast } from "sonner";
@@ -59,7 +60,7 @@ function OrdersPage() {
         title="Commandes"
         description={`${store.orders.length} commandes enregistrées sur le site e-commerce.`}
         actions={
-          <Button variant="outline" onClick={() => toast.success("Export CSV généré")}>
+          <Button variant="outline" onClick={() => exportCSV("commandes", store.orders.map((o) => ({ ...o, total: orderTotal(o) })), "Export CSV généré")}>
             <Download className="size-4" /> Exporter
           </Button>
         }

@@ -1,3 +1,4 @@
+import { pickFile } from "@/lib/export";
 import { useState } from "react";
 import { createFileRoute, useNavigate, useParams } from "@tanstack/react-router";
 import { Archive, ArrowLeft, BellRing, Paperclip, Send, Upload } from "lucide-react";
@@ -85,7 +86,7 @@ function QuoteDetail() {
             <Button variant="outline" onClick={() => push({ status: "Relance" }, "Relance programmée")}>
               <BellRing className="size-4" /> Programmer une relance
             </Button>
-            <Button variant="outline" onClick={() => toast.success("Devis PDF importé")}>
+            <Button variant="outline" onClick={() => pickFile(".pdf,.doc,.docx,.xls,.xlsx", (f) => push({ attachments: [...quote.attachments, f.name] }, `Devis importé : ${f.name}`))}>
               <Upload className="size-4" /> Importer un devis
             </Button>
             <Button variant="outline" onClick={() => push({ status: "Clôturé" }, "Devis archivé")}>
