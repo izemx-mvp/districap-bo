@@ -55,7 +55,7 @@ function ReportingPage() {
   const conversion = store.quotes.length ? Math.round((accepted / store.quotes.length) * 100) : 0;
   const basket = store.orders.length ? ca / store.orders.length : 0;
 
-  const byCategory = store.categories.map((c, i) => ({
+  const byCategory = store.categories.filter((c) => c.parentId === null).map((c, i) => ({
     name: c.name,
     value: store.products.filter((p) => p.categoryId === c.id).length,
     fill: palette[i % palette.length],
