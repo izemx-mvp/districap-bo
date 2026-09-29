@@ -39,6 +39,7 @@ function NewsletterPage() {
   const { confirm, dialog } = useConfirm();
   const [open, setOpen] = useState(false);
   const [draft, setDraft] = useState({ name: "", subject: "", content: "" });
+  const [previewing, setPreviewing] = useState<Campaign | null>(null);
 
   const active = store.subscribers.filter((s) => s.status === "abonné").length;
   const sent = store.campaigns.filter((c) => c.status === "Envoyée");
@@ -139,7 +140,7 @@ function NewsletterPage() {
               <DropdownMenu>
                 <DropdownMenuTrigger asChild><Button variant="ghost" size="icon"><MoreHorizontal className="size-4" /></Button></DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
-                  <DropdownMenuItem onClick={() => toast.success("Aperçu de la campagne ouvert")}>Prévisualiser</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => setPreviewing(c)}>Prévisualiser</DropdownMenuItem>
                   <DropdownMenuItem onClick={() => { store.update("campaigns", c.id, { status: "Envoyée", sent: active }); toast.success("Campagne envoyée aux abonnés"); }}>
                     <Send className="size-4" /> Envoyer maintenant
                   </DropdownMenuItem>
@@ -184,8 +185,39 @@ function NewsletterPage() {
             >
               Enregistrer
             </Button>
-            <Button variant="outline" onClick={() => toast.success("E-mail de test envoyé")}>Envoyer un test</Button>
+            <Button
+              variant="outline"
+              onClick={() => {
+                if (!draft.subject.trim()) return toast.error("Renseignez l'objet de l'e-mail avant l'envoi d'un test");
+                if (!draft.content.trim()) return toast.error("Le contenu de l'e-mail est vide");
+                toast.success(`E-mail de test envoyé à ${store.session?.email ?? "votre adresse"}`);
+              }}
+            >
+              Envoyer un test
+            </Button>
           </DialogFooter>
+        </DialogContent>
+      </Dialog>
+      <Dialog open={!!previewing} onOpenChange={(o) => !o && setPreviewing(null)}>
+        <DialogContent className="max-w-lg">
+          <DialogHeader>
+            <DialogTitle>{previewing?.name}</DialogTitle>
+            <DialogDescription>Aperçu de la campagne — {previewing ? formatDate(previewing.date) : ""}</DialogDescription>
+          </DialogHeader>
+          {previewing ? (
+            <div className="space-y-3">
+              <div className="rounded-lg border border-border bg-muted/40 p-4 text-sm">
+                <p className="font-medium">{previewing.name}</p>
+                <p className="mt-2 text-muted-foreground">Bonjour, découvrez les dernières nouveautés et offres DISTRICAP.</p>
+              </div>
+              <dl className="grid grid-cols-3 gap-3 text-sm">
+                <div><dt className="text-muted-foreground">Envois</dt><dd className="font-medium">{previewing.sent.toLocaleString("fr-FR")}</dd></div>
+                <div><dt className="text-muted-foreground">Ouvertures</dt><dd className="font-medium">{previewing.openRate} %</dd></div>
+                <div><dt className="text-muted-foreground">Clics</dt><dd className="font-medium">{previewing.clickRate} %</dd></div>
+              </dl>
+              <StatusBadge value={previewing.status} />
+            </div>
+          ) : null}
         </DialogContent>
       </Dialog>
       {dialog}
