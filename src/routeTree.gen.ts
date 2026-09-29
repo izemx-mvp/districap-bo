@@ -21,6 +21,7 @@ import { Route as LoginRouteImport } from './routes/login'
 import { Route as MediaRouteImport } from './routes/media'
 import { Route as NewsRouteImport } from './routes/news'
 import { Route as NewsletterRouteImport } from './routes/newsletter'
+import { Route as NotificationsRouteImport } from './routes/notifications'
 import { Route as OrdersRouteImport } from './routes/orders'
 import { Route as PagesRouteImport } from './routes/pages'
 import { Route as ProductsRouteImport } from './routes/products'
@@ -28,6 +29,7 @@ import { Route as PromotionsRouteImport } from './routes/promotions'
 import { Route as QuotesRouteImport } from './routes/quotes'
 import { Route as ReferencesRouteImport } from './routes/references'
 import { Route as SolutionsRouteImport } from './routes/solutions'
+import { Route as UsersRouteImport } from './routes/users'
 import { Route as ClientsIdRouteImport } from './routes/clients.$id'
 import { Route as OrdersIdRouteImport } from './routes/orders.$id'
 import { Route as ProductsIdRouteImport } from './routes/products.$id'
@@ -93,6 +95,11 @@ const NewsletterRoute = NewsletterRouteImport.update({
   path: '/newsletter',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NotificationsRoute = NotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OrdersRoute = OrdersRouteImport.update({
   id: '/orders',
   path: '/orders',
@@ -126,6 +133,11 @@ const ReferencesRoute = ReferencesRouteImport.update({
 const SolutionsRoute = SolutionsRouteImport.update({
   id: '/solutions',
   path: '/solutions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UsersRoute = UsersRouteImport.update({
+  id: '/users',
+  path: '/users',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ClientsIdRoute = ClientsIdRouteImport.update({
@@ -162,6 +174,7 @@ export interface FileRoutesByFullPath {
   '/media': typeof MediaRoute
   '/news': typeof NewsRoute
   '/newsletter': typeof NewsletterRoute
+  '/notifications': typeof NotificationsRoute
   '/orders': typeof OrdersRouteWithChildren
   '/pages': typeof PagesRoute
   '/products': typeof ProductsRouteWithChildren
@@ -169,6 +182,7 @@ export interface FileRoutesByFullPath {
   '/quotes': typeof QuotesRouteWithChildren
   '/references': typeof ReferencesRoute
   '/solutions': typeof SolutionsRoute
+  '/users': typeof UsersRoute
   '/clients/$id': typeof ClientsIdRoute
   '/orders/$id': typeof OrdersIdRoute
   '/products/$id': typeof ProductsIdRoute
@@ -187,6 +201,7 @@ export interface FileRoutesByTo {
   '/media': typeof MediaRoute
   '/news': typeof NewsRoute
   '/newsletter': typeof NewsletterRoute
+  '/notifications': typeof NotificationsRoute
   '/orders': typeof OrdersRouteWithChildren
   '/pages': typeof PagesRoute
   '/products': typeof ProductsRouteWithChildren
@@ -194,6 +209,7 @@ export interface FileRoutesByTo {
   '/quotes': typeof QuotesRouteWithChildren
   '/references': typeof ReferencesRoute
   '/solutions': typeof SolutionsRoute
+  '/users': typeof UsersRoute
   '/clients/$id': typeof ClientsIdRoute
   '/orders/$id': typeof OrdersIdRoute
   '/products/$id': typeof ProductsIdRoute
@@ -213,6 +229,7 @@ export interface FileRoutesById {
   '/media': typeof MediaRoute
   '/news': typeof NewsRoute
   '/newsletter': typeof NewsletterRoute
+  '/notifications': typeof NotificationsRoute
   '/orders': typeof OrdersRouteWithChildren
   '/pages': typeof PagesRoute
   '/products': typeof ProductsRouteWithChildren
@@ -220,6 +237,7 @@ export interface FileRoutesById {
   '/quotes': typeof QuotesRouteWithChildren
   '/references': typeof ReferencesRoute
   '/solutions': typeof SolutionsRoute
+  '/users': typeof UsersRoute
   '/clients/$id': typeof ClientsIdRoute
   '/orders/$id': typeof OrdersIdRoute
   '/products/$id': typeof ProductsIdRoute
@@ -240,6 +258,7 @@ export interface FileRouteTypes {
     | '/media'
     | '/news'
     | '/newsletter'
+    | '/notifications'
     | '/orders'
     | '/pages'
     | '/products'
@@ -247,6 +266,7 @@ export interface FileRouteTypes {
     | '/quotes'
     | '/references'
     | '/solutions'
+    | '/users'
     | '/clients/$id'
     | '/orders/$id'
     | '/products/$id'
@@ -265,6 +285,7 @@ export interface FileRouteTypes {
     | '/media'
     | '/news'
     | '/newsletter'
+    | '/notifications'
     | '/orders'
     | '/pages'
     | '/products'
@@ -272,6 +293,7 @@ export interface FileRouteTypes {
     | '/quotes'
     | '/references'
     | '/solutions'
+    | '/users'
     | '/clients/$id'
     | '/orders/$id'
     | '/products/$id'
@@ -290,6 +312,7 @@ export interface FileRouteTypes {
     | '/media'
     | '/news'
     | '/newsletter'
+    | '/notifications'
     | '/orders'
     | '/pages'
     | '/products'
@@ -297,6 +320,7 @@ export interface FileRouteTypes {
     | '/quotes'
     | '/references'
     | '/solutions'
+    | '/users'
     | '/clients/$id'
     | '/orders/$id'
     | '/products/$id'
@@ -316,6 +340,7 @@ export interface RootRouteChildren {
   MediaRoute: typeof MediaRoute
   NewsRoute: typeof NewsRoute
   NewsletterRoute: typeof NewsletterRoute
+  NotificationsRoute: typeof NotificationsRoute
   OrdersRoute: typeof OrdersRouteWithChildren
   PagesRoute: typeof PagesRoute
   ProductsRoute: typeof ProductsRouteWithChildren
@@ -323,6 +348,7 @@ export interface RootRouteChildren {
   QuotesRoute: typeof QuotesRouteWithChildren
   ReferencesRoute: typeof ReferencesRoute
   SolutionsRoute: typeof SolutionsRoute
+  UsersRoute: typeof UsersRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -411,6 +437,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof NewsletterRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/notifications': {
+      id: '/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof NotificationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/orders': {
       id: '/orders'
       path: '/orders'
@@ -458,6 +491,13 @@ declare module '@tanstack/react-router' {
       path: '/solutions'
       fullPath: '/solutions'
       preLoaderRoute: typeof SolutionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/users': {
+      id: '/users'
+      path: '/users'
+      fullPath: '/users'
+      preLoaderRoute: typeof UsersRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/clients/$id': {
@@ -549,6 +589,7 @@ const rootRouteChildren: RootRouteChildren = {
   MediaRoute: MediaRoute,
   NewsRoute: NewsRoute,
   NewsletterRoute: NewsletterRoute,
+  NotificationsRoute: NotificationsRoute,
   OrdersRoute: OrdersRouteWithChildren,
   PagesRoute: PagesRoute,
   ProductsRoute: ProductsRouteWithChildren,
@@ -556,6 +597,7 @@ const rootRouteChildren: RootRouteChildren = {
   QuotesRoute: QuotesRouteWithChildren,
   ReferencesRoute: ReferencesRoute,
   SolutionsRoute: SolutionsRoute,
+  UsersRoute: UsersRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
