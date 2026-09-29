@@ -1,3 +1,4 @@
+import { useOpenOnNew } from "@/lib/use-open-on-new";
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { Copy, Eye, MoreHorizontal, Plus } from "lucide-react";
@@ -74,6 +75,7 @@ function SolutionsPage() {
   const { confirm, dialog } = useConfirm();
   const [editing, setEditing] = useState<Solution | null>(null);
   const [isNew, setIsNew] = useState(false);
+  useOpenOnNew(() => { setEditing(empty()); setIsNew(true); });
   const [preview, setPreview] = useState<Solution | null>(null);
 
   const save = () => {
@@ -205,7 +207,7 @@ function SolutionsPage() {
                   </div>
                 </SectionCard>
               </div>
-              <Button className="w-full">{preview.cta}</Button>
+              <Button className="w-full" onClick={() => toast.info(`Aperçu : le bouton « ${preview.cta} » redirigera le visiteur vers le formulaire de contact`)}>{preview.cta}</Button>
             </div>
           ) : null}
         </DialogContent>

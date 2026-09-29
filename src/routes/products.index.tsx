@@ -16,7 +16,7 @@ import {
 import type { Product } from "@/lib/mock-data";
 import { formatDate, formatMAD, newId, useStore } from "@/lib/store";
 
-export const Route = createFileRoute("/products")({
+export const Route = createFileRoute("/products/")({
   head: () => ({
     meta: [
       { title: "Produits — Back-office DISTRICAP" },

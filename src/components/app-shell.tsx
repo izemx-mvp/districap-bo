@@ -39,7 +39,7 @@ import { useStore } from "@/lib/store";
 import { cn } from "@/lib/utils";
 
 const createActions = [
-  { label: "Nouveau produit", href: "/products", hint: "new" },
+  { label: "Nouveau produit", href: "/products/new", hint: "new" },
   { label: "Nouveau client", href: "/clients", hint: "new" },
   { label: "Nouvelle promotion", href: "/promotions", hint: "new" },
   { label: "Nouvelle solution", href: "/solutions", hint: "new" },
@@ -200,7 +200,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                   {createActions.map((a) => (
                     <DropdownMenuItem
                       key={a.label}
-                      onClick={() => navigate({ to: a.href as never, search: { new: true } as never })}
+                      onClick={() => (a.href === "/products/new" ? navigate({ to: "/products/$id", params: { id: "new" } }) : navigate({ to: a.href as never, search: { new: true } as never }))}
                     >
                       {a.label}
                     </DropdownMenuItem>

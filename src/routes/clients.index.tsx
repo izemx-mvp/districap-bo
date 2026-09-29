@@ -1,3 +1,4 @@
+import { useOpenOnEdit, useOpenOnNew } from "@/lib/use-open-on-new";
 import { exportCSV } from "@/lib/export";
 import { useState } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
@@ -27,7 +28,7 @@ import {
 import type { Client } from "@/lib/mock-data";
 import { formatDate, formatMAD, newId, useStore } from "@/lib/store";
 
-export const Route = createFileRoute("/clients")({
+export const Route = createFileRoute("/clients/")({
   head: () => ({
     meta: [
       { title: "Clients — Back-office DISTRICAP" },
@@ -63,6 +64,8 @@ function ClientsPage() {
   const store = useStore();
   const navigate = useNavigate();
   const [editing, setEditing] = useState<Client | null>(null);
+  useOpenOnNew(() => { setEditing(empty()); });
+  useOpenOnEdit((id) => { const c = store.clients.find((x) => x.id === id); if (c) setEditing(c); });
 
   const cities = [...new Set(store.clients.map((c) => c.city))];
 

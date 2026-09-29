@@ -50,7 +50,14 @@ function UsersPage() {
   const [editing, setEditing] = useState<User | null>(null);
   const [isNew, setIsNew] = useState(false);
   const [role, setRole] = useState<User["role"]>("Commercial");
-  const [matrix, setMatrix] = useState<Record<string, boolean[]>>({});
+  const [matrix, setMatrix] = useState<Record<string, boolean[]>>(() => {
+    try {
+      return JSON.parse(String(store.settings["permissions"] ?? "{}")) as Record<string, boolean[]>;
+    } catch {
+      return {};
+    }
+  });
+  const [dirty, setDirty] = useState(false);
 
   const key = (m: string, r: string) => `${r}|${m}`;
   const cell = (m: string, i: number) => matrix[key(m, role)] ?? defaultsFor(role, i);
@@ -102,7 +109,7 @@ function UsersPage() {
                 <DropdownMenuTrigger asChild><Button variant="ghost" size="icon"><MoreHorizontal className="size-4" /></Button></DropdownMenuTrigger>
                 <DropdownMenuContent align="end">
                   <DropdownMenuItem onClick={() => { setEditing(u); setIsNew(false); }}>Modifier</DropdownMenuItem>
-                  <DropdownMenuItem onClick={() => toast.success(`Lien de réinitialisation envoyé à ${u.email}`)}>Réinitialiser le mot de passe</DropdownMenuItem>
+                  <DropdownMenuItem onClick={() => { store.logActivity("a réinitialisé le mot de passe de", "Utilisateurs", u.name, "/users"); toast.success(`Lien de réinitialisation envoyé à ${u.email}`); }}>Réinitialiser le mot de passe</DropdownMenuItem>
                   <DropdownMenuItem onClick={() => { store.update("users", u.id, { status: u.status === "actif" ? "inactif" : "actif" }); toast.success("Statut du compte mis à jour"); }}>
                     {u.status === "actif" ? "Désactiver" : "Activer"}
                   </DropdownMenuItem>
@@ -132,7 +139,16 @@ function UsersPage() {
                   <SelectTrigger className="w-48"><SelectValue /></SelectTrigger>
                   <SelectContent>{roles.map((r) => <SelectItem key={r} value={r}>{r}</SelectItem>)}</SelectContent>
                 </Select>
-                <Button size="sm" onClick={() => toast.success("Permissions enregistrées")}><ShieldCheck className="size-4" /> Enregistrer</Button>
+                <Button
+                  size="sm"
+                  variant={dirty ? "default" : "outline"}
+                  onClick={() => {
+                    store.setSettings({ permissions: JSON.stringify(matrix) });
+                    store.logActivity("a modifié les permissions du rôle", "Utilisateurs", role, "/users");
+                    setDirty(false);
+                    toast.success(`Permissions du rôle ${role} enregistrées`);
+                  }}
+                ><ShieldCheck className="size-4" /> Enregistrer</Button>
               </div>
             }
           >
@@ -157,6 +173,7 @@ function UsersPage() {
                               const current = [...cell(m, i)];
                               current[pi] = !!v;
                               setMatrix({ ...matrix, [key(m, role)]: current });
+                              setDirty(true);
                             }}
                           />
                         </TableCell>

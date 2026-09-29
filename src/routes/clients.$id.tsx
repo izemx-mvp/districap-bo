@@ -61,7 +61,7 @@ function ClientDetail() {
         actions={
           <>
             <StatusBadge value={client.status} />
-            <Button variant="outline" onClick={() => navigate({ to: "/clients" })}>Modifier</Button>
+            <Button variant="outline" onClick={() => navigate({ to: "/clients", search: { edit: client.id } as never })}>Modifier</Button>
             <Button
               variant="outline"
               onClick={() => {

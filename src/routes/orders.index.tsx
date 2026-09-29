@@ -18,7 +18,7 @@ import {
 import type { Order } from "@/lib/mock-data";
 import { formatDate, formatMAD, orderTotal, useStore } from "@/lib/store";
 
-export const Route = createFileRoute("/orders")({
+export const Route = createFileRoute("/orders/")({
   head: () => ({
     meta: [
       { title: "Commandes — Back-office DISTRICAP" },

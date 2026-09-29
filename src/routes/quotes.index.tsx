@@ -20,7 +20,7 @@ import {
 import { commercials, type Quote } from "@/lib/mock-data";
 import { formatDate, useStore } from "@/lib/store";
 
-export const Route = createFileRoute("/quotes")({
+export const Route = createFileRoute("/quotes/")({
   head: () => ({
     meta: [
       { title: "Demandes de devis — Back-office DISTRICAP" },
