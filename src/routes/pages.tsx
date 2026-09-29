@@ -76,12 +76,12 @@ function PagesPage() {
     <div className="space-y-6">
       <PageHeader
         title="Pages du site"
-        description={`${store.pages.length} pages institutionnelles gérées depuis le back-office.`}
+        description={`${store.sitePages.length} pages institutionnelles gérées depuis le back-office.`}
         actions={<Button onClick={() => { setEditing(empty()); setIsNew(true); }}><Plus className="size-4" /> Nouvelle page</Button>}
       />
 
       <DataTable
-        rows={store.pages}
+        rows={store.sitePages}
         columns={columns}
         search={(p, t) => `${p.title} ${p.slug}`.toLowerCase().includes(t)}
         filters={[{ key: "status", label: "Statut", options: ["actif", "inactif", "brouillon"], match: (p, v) => p.status === v }]}
@@ -92,11 +92,11 @@ function PagesPage() {
             <DropdownMenuContent align="end">
               <DropdownMenuItem onClick={() => { setEditing(p); setIsNew(false); }}>Éditer</DropdownMenuItem>
               <DropdownMenuItem onClick={() => setPreview(p)}><Eye className="size-4" /> Prévisualiser</DropdownMenuItem>
-              <DropdownMenuItem onClick={() => { store.update("pages", p.id, { status: p.status === "actif" ? "inactif" : "actif" }); toast.success("Statut de publication mis à jour"); }}>
+              <DropdownMenuItem onClick={() => { store.update("sitePages", p.id, { status: p.status === "actif" ? "inactif" : "actif" }); toast.success("Statut de publication mis à jour"); }}>
                 {p.status === "actif" ? "Dépublier" : "Publier"}
               </DropdownMenuItem>
-              <DropdownMenuItem onClick={() => { store.add("pages", { ...p, id: newId("pg"), title: `${p.title} (copie)`, slug: `${p.slug}-copie`, status: "brouillon" }); toast.success("Page dupliquée"); }}>Dupliquer</DropdownMenuItem>
-              <DropdownMenuItem variant="destructive" onClick={() => confirm("Supprimer la page ?", `${p.title} ne sera plus accessible.`, () => { store.remove("pages", p.id); toast.success("Page supprimée"); })}>Supprimer</DropdownMenuItem>
+              <DropdownMenuItem onClick={() => { store.add("sitePages", { ...p, id: newId("pg"), title: `${p.title} (copie)`, slug: `${p.slug}-copie`, status: "brouillon" }); toast.success("Page dupliquée"); }}>Dupliquer</DropdownMenuItem>
+              <DropdownMenuItem variant="destructive" onClick={() => confirm("Supprimer la page ?", `${p.title} ne sera plus accessible.`, () => { store.remove("sitePages", p.id); toast.success("Page supprimée"); })}>Supprimer</DropdownMenuItem>
             </DropdownMenuContent>
           </DropdownMenu>
         )}
@@ -181,8 +181,8 @@ function PagesPage() {
                 if (!editing) return;
                 if (!editing.title.trim()) return toast.error("Le titre est obligatoire");
                 const patch = { ...editing, updatedAt: new Date().toISOString().slice(0, 10) };
-                if (isNew) store.add("pages", patch);
-                else store.update("pages", editing.id, patch);
+                if (isNew) store.add("sitePages", patch);
+                else store.update("sitePages", editing.id, patch);
                 store.logActivity("a modifié la page", "Pages", editing.title, "/pages");
                 toast.success("Page enregistrée");
                 setEditing(null);
