@@ -14,6 +14,8 @@ import { Route as BannersRouteImport } from './routes/banners'
 import { Route as BrandsRouteImport } from './routes/brands'
 import { Route as CategoriesRouteImport } from './routes/categories'
 import { Route as ClientsRouteImport } from './routes/clients'
+import { Route as DocumentsRouteImport } from './routes/documents'
+import { Route as FormsRouteImport } from './routes/forms'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as MediaRouteImport } from './routes/media'
 import { Route as NewsRouteImport } from './routes/news'
@@ -52,6 +54,16 @@ const CategoriesRoute = CategoriesRouteImport.update({
 const ClientsRoute = ClientsRouteImport.update({
   id: '/clients',
   path: '/clients',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocumentsRoute = DocumentsRouteImport.update({
+  id: '/documents',
+  path: '/documents',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FormsRoute = FormsRouteImport.update({
+  id: '/forms',
+  path: '/forms',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -131,6 +143,8 @@ export interface FileRoutesByFullPath {
   '/brands': typeof BrandsRoute
   '/categories': typeof CategoriesRoute
   '/clients': typeof ClientsRouteWithChildren
+  '/documents': typeof DocumentsRoute
+  '/forms': typeof FormsRoute
   '/login': typeof LoginRoute
   '/media': typeof MediaRoute
   '/news': typeof NewsRoute
@@ -152,6 +166,8 @@ export interface FileRoutesByTo {
   '/brands': typeof BrandsRoute
   '/categories': typeof CategoriesRoute
   '/clients': typeof ClientsRouteWithChildren
+  '/documents': typeof DocumentsRoute
+  '/forms': typeof FormsRoute
   '/login': typeof LoginRoute
   '/media': typeof MediaRoute
   '/news': typeof NewsRoute
@@ -174,6 +190,8 @@ export interface FileRoutesById {
   '/brands': typeof BrandsRoute
   '/categories': typeof CategoriesRoute
   '/clients': typeof ClientsRouteWithChildren
+  '/documents': typeof DocumentsRoute
+  '/forms': typeof FormsRoute
   '/login': typeof LoginRoute
   '/media': typeof MediaRoute
   '/news': typeof NewsRoute
@@ -197,6 +215,8 @@ export interface FileRouteTypes {
     | '/brands'
     | '/categories'
     | '/clients'
+    | '/documents'
+    | '/forms'
     | '/login'
     | '/media'
     | '/news'
@@ -218,6 +238,8 @@ export interface FileRouteTypes {
     | '/brands'
     | '/categories'
     | '/clients'
+    | '/documents'
+    | '/forms'
     | '/login'
     | '/media'
     | '/news'
@@ -239,6 +261,8 @@ export interface FileRouteTypes {
     | '/brands'
     | '/categories'
     | '/clients'
+    | '/documents'
+    | '/forms'
     | '/login'
     | '/media'
     | '/news'
@@ -261,6 +285,8 @@ export interface RootRouteChildren {
   BrandsRoute: typeof BrandsRoute
   CategoriesRoute: typeof CategoriesRoute
   ClientsRoute: typeof ClientsRouteWithChildren
+  DocumentsRoute: typeof DocumentsRoute
+  FormsRoute: typeof FormsRoute
   LoginRoute: typeof LoginRoute
   MediaRoute: typeof MediaRoute
   NewsRoute: typeof NewsRoute
@@ -308,6 +334,20 @@ declare module '@tanstack/react-router' {
       path: '/clients'
       fullPath: '/clients'
       preLoaderRoute: typeof ClientsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/documents': {
+      id: '/documents'
+      path: '/documents'
+      fullPath: '/documents'
+      preLoaderRoute: typeof DocumentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/forms': {
+      id: '/forms'
+      path: '/forms'
+      fullPath: '/forms'
+      preLoaderRoute: typeof FormsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -462,6 +502,8 @@ const rootRouteChildren: RootRouteChildren = {
   BrandsRoute: BrandsRoute,
   CategoriesRoute: CategoriesRoute,
   ClientsRoute: ClientsRouteWithChildren,
+  DocumentsRoute: DocumentsRoute,
+  FormsRoute: FormsRoute,
   LoginRoute: LoginRoute,
   MediaRoute: MediaRoute,
   NewsRoute: NewsRoute,
