@@ -10,20 +10,28 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ActivityRouteImport } from './routes/activity'
 import { Route as BannersRouteImport } from './routes/banners'
 import { Route as BrandsRouteImport } from './routes/brands'
 import { Route as CategoriesRouteImport } from './routes/categories'
 import { Route as ClientsRouteImport } from './routes/clients'
+import { Route as DocumentsRouteImport } from './routes/documents'
+import { Route as FormsRouteImport } from './routes/forms'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as MediaRouteImport } from './routes/media'
 import { Route as NewsRouteImport } from './routes/news'
+import { Route as NewsletterRouteImport } from './routes/newsletter'
+import { Route as NotificationsRouteImport } from './routes/notifications'
 import { Route as OrdersRouteImport } from './routes/orders'
 import { Route as PagesRouteImport } from './routes/pages'
 import { Route as ProductsRouteImport } from './routes/products'
 import { Route as PromotionsRouteImport } from './routes/promotions'
 import { Route as QuotesRouteImport } from './routes/quotes'
 import { Route as ReferencesRouteImport } from './routes/references'
+import { Route as ReportingRouteImport } from './routes/reporting'
+import { Route as SettingsRouteImport } from './routes/settings'
 import { Route as SolutionsRouteImport } from './routes/solutions'
+import { Route as UsersRouteImport } from './routes/users'
 import { Route as ClientsIdRouteImport } from './routes/clients.$id'
 import { Route as OrdersIdRouteImport } from './routes/orders.$id'
 import { Route as ProductsIdRouteImport } from './routes/products.$id'
@@ -32,6 +40,11 @@ import { Route as QuotesIdRouteImport } from './routes/quotes.$id'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ActivityRoute = ActivityRouteImport.update({
+  id: '/activity',
+  path: '/activity',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BannersRoute = BannersRouteImport.update({
@@ -54,6 +67,16 @@ const ClientsRoute = ClientsRouteImport.update({
   path: '/clients',
   getParentRoute: () => rootRouteImport,
 } as any)
+const DocumentsRoute = DocumentsRouteImport.update({
+  id: '/documents',
+  path: '/documents',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FormsRoute = FormsRouteImport.update({
+  id: '/forms',
+  path: '/forms',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const LoginRoute = LoginRouteImport.update({
   id: '/login',
   path: '/login',
@@ -67,6 +90,16 @@ const MediaRoute = MediaRouteImport.update({
 const NewsRoute = NewsRouteImport.update({
   id: '/news',
   path: '/news',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewsletterRoute = NewsletterRouteImport.update({
+  id: '/newsletter',
+  path: '/newsletter',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NotificationsRoute = NotificationsRouteImport.update({
+  id: '/notifications',
+  path: '/notifications',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OrdersRoute = OrdersRouteImport.update({
@@ -99,9 +132,24 @@ const ReferencesRoute = ReferencesRouteImport.update({
   path: '/references',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ReportingRoute = ReportingRouteImport.update({
+  id: '/reporting',
+  path: '/reporting',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsRoute = SettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SolutionsRoute = SolutionsRouteImport.update({
   id: '/solutions',
   path: '/solutions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const UsersRoute = UsersRouteImport.update({
+  id: '/users',
+  path: '/users',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ClientsIdRoute = ClientsIdRouteImport.update({
@@ -127,20 +175,28 @@ const QuotesIdRoute = QuotesIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/activity': typeof ActivityRoute
   '/banners': typeof BannersRoute
   '/brands': typeof BrandsRoute
   '/categories': typeof CategoriesRoute
   '/clients': typeof ClientsRouteWithChildren
+  '/documents': typeof DocumentsRoute
+  '/forms': typeof FormsRoute
   '/login': typeof LoginRoute
   '/media': typeof MediaRoute
   '/news': typeof NewsRoute
+  '/newsletter': typeof NewsletterRoute
+  '/notifications': typeof NotificationsRoute
   '/orders': typeof OrdersRouteWithChildren
   '/pages': typeof PagesRoute
   '/products': typeof ProductsRouteWithChildren
   '/promotions': typeof PromotionsRoute
   '/quotes': typeof QuotesRouteWithChildren
   '/references': typeof ReferencesRoute
+  '/reporting': typeof ReportingRoute
+  '/settings': typeof SettingsRoute
   '/solutions': typeof SolutionsRoute
+  '/users': typeof UsersRoute
   '/clients/$id': typeof ClientsIdRoute
   '/orders/$id': typeof OrdersIdRoute
   '/products/$id': typeof ProductsIdRoute
@@ -148,20 +204,28 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/activity': typeof ActivityRoute
   '/banners': typeof BannersRoute
   '/brands': typeof BrandsRoute
   '/categories': typeof CategoriesRoute
   '/clients': typeof ClientsRouteWithChildren
+  '/documents': typeof DocumentsRoute
+  '/forms': typeof FormsRoute
   '/login': typeof LoginRoute
   '/media': typeof MediaRoute
   '/news': typeof NewsRoute
+  '/newsletter': typeof NewsletterRoute
+  '/notifications': typeof NotificationsRoute
   '/orders': typeof OrdersRouteWithChildren
   '/pages': typeof PagesRoute
   '/products': typeof ProductsRouteWithChildren
   '/promotions': typeof PromotionsRoute
   '/quotes': typeof QuotesRouteWithChildren
   '/references': typeof ReferencesRoute
+  '/reporting': typeof ReportingRoute
+  '/settings': typeof SettingsRoute
   '/solutions': typeof SolutionsRoute
+  '/users': typeof UsersRoute
   '/clients/$id': typeof ClientsIdRoute
   '/orders/$id': typeof OrdersIdRoute
   '/products/$id': typeof ProductsIdRoute
@@ -170,20 +234,28 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/activity': typeof ActivityRoute
   '/banners': typeof BannersRoute
   '/brands': typeof BrandsRoute
   '/categories': typeof CategoriesRoute
   '/clients': typeof ClientsRouteWithChildren
+  '/documents': typeof DocumentsRoute
+  '/forms': typeof FormsRoute
   '/login': typeof LoginRoute
   '/media': typeof MediaRoute
   '/news': typeof NewsRoute
+  '/newsletter': typeof NewsletterRoute
+  '/notifications': typeof NotificationsRoute
   '/orders': typeof OrdersRouteWithChildren
   '/pages': typeof PagesRoute
   '/products': typeof ProductsRouteWithChildren
   '/promotions': typeof PromotionsRoute
   '/quotes': typeof QuotesRouteWithChildren
   '/references': typeof ReferencesRoute
+  '/reporting': typeof ReportingRoute
+  '/settings': typeof SettingsRoute
   '/solutions': typeof SolutionsRoute
+  '/users': typeof UsersRoute
   '/clients/$id': typeof ClientsIdRoute
   '/orders/$id': typeof OrdersIdRoute
   '/products/$id': typeof ProductsIdRoute
@@ -193,20 +265,28 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/activity'
     | '/banners'
     | '/brands'
     | '/categories'
     | '/clients'
+    | '/documents'
+    | '/forms'
     | '/login'
     | '/media'
     | '/news'
+    | '/newsletter'
+    | '/notifications'
     | '/orders'
     | '/pages'
     | '/products'
     | '/promotions'
     | '/quotes'
     | '/references'
+    | '/reporting'
+    | '/settings'
     | '/solutions'
+    | '/users'
     | '/clients/$id'
     | '/orders/$id'
     | '/products/$id'
@@ -214,20 +294,28 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/activity'
     | '/banners'
     | '/brands'
     | '/categories'
     | '/clients'
+    | '/documents'
+    | '/forms'
     | '/login'
     | '/media'
     | '/news'
+    | '/newsletter'
+    | '/notifications'
     | '/orders'
     | '/pages'
     | '/products'
     | '/promotions'
     | '/quotes'
     | '/references'
+    | '/reporting'
+    | '/settings'
     | '/solutions'
+    | '/users'
     | '/clients/$id'
     | '/orders/$id'
     | '/products/$id'
@@ -235,20 +323,28 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/activity'
     | '/banners'
     | '/brands'
     | '/categories'
     | '/clients'
+    | '/documents'
+    | '/forms'
     | '/login'
     | '/media'
     | '/news'
+    | '/newsletter'
+    | '/notifications'
     | '/orders'
     | '/pages'
     | '/products'
     | '/promotions'
     | '/quotes'
     | '/references'
+    | '/reporting'
+    | '/settings'
     | '/solutions'
+    | '/users'
     | '/clients/$id'
     | '/orders/$id'
     | '/products/$id'
@@ -257,20 +353,28 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ActivityRoute: typeof ActivityRoute
   BannersRoute: typeof BannersRoute
   BrandsRoute: typeof BrandsRoute
   CategoriesRoute: typeof CategoriesRoute
   ClientsRoute: typeof ClientsRouteWithChildren
+  DocumentsRoute: typeof DocumentsRoute
+  FormsRoute: typeof FormsRoute
   LoginRoute: typeof LoginRoute
   MediaRoute: typeof MediaRoute
   NewsRoute: typeof NewsRoute
+  NewsletterRoute: typeof NewsletterRoute
+  NotificationsRoute: typeof NotificationsRoute
   OrdersRoute: typeof OrdersRouteWithChildren
   PagesRoute: typeof PagesRoute
   ProductsRoute: typeof ProductsRouteWithChildren
   PromotionsRoute: typeof PromotionsRoute
   QuotesRoute: typeof QuotesRouteWithChildren
   ReferencesRoute: typeof ReferencesRoute
+  ReportingRoute: typeof ReportingRoute
+  SettingsRoute: typeof SettingsRoute
   SolutionsRoute: typeof SolutionsRoute
+  UsersRoute: typeof UsersRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -280,6 +384,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/activity': {
+      id: '/activity'
+      path: '/activity'
+      fullPath: '/activity'
+      preLoaderRoute: typeof ActivityRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/banners': {
@@ -310,6 +421,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ClientsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/documents': {
+      id: '/documents'
+      path: '/documents'
+      fullPath: '/documents'
+      preLoaderRoute: typeof DocumentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/forms': {
+      id: '/forms'
+      path: '/forms'
+      fullPath: '/forms'
+      preLoaderRoute: typeof FormsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/login': {
       id: '/login'
       path: '/login'
@@ -329,6 +454,20 @@ declare module '@tanstack/react-router' {
       path: '/news'
       fullPath: '/news'
       preLoaderRoute: typeof NewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/newsletter': {
+      id: '/newsletter'
+      path: '/newsletter'
+      fullPath: '/newsletter'
+      preLoaderRoute: typeof NewsletterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/notifications': {
+      id: '/notifications'
+      path: '/notifications'
+      fullPath: '/notifications'
+      preLoaderRoute: typeof NotificationsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/orders': {
@@ -373,11 +512,32 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ReferencesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/reporting': {
+      id: '/reporting'
+      path: '/reporting'
+      fullPath: '/reporting'
+      preLoaderRoute: typeof ReportingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings': {
+      id: '/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof SettingsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/solutions': {
       id: '/solutions'
       path: '/solutions'
       fullPath: '/solutions'
       preLoaderRoute: typeof SolutionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/users': {
+      id: '/users'
+      path: '/users'
+      fullPath: '/users'
+      preLoaderRoute: typeof UsersRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/clients/$id': {
@@ -458,20 +618,28 @@ const QuotesRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ActivityRoute: ActivityRoute,
   BannersRoute: BannersRoute,
   BrandsRoute: BrandsRoute,
   CategoriesRoute: CategoriesRoute,
   ClientsRoute: ClientsRouteWithChildren,
+  DocumentsRoute: DocumentsRoute,
+  FormsRoute: FormsRoute,
   LoginRoute: LoginRoute,
   MediaRoute: MediaRoute,
   NewsRoute: NewsRoute,
+  NewsletterRoute: NewsletterRoute,
+  NotificationsRoute: NotificationsRoute,
   OrdersRoute: OrdersRouteWithChildren,
   PagesRoute: PagesRoute,
   ProductsRoute: ProductsRouteWithChildren,
   PromotionsRoute: PromotionsRoute,
   QuotesRoute: QuotesRouteWithChildren,
   ReferencesRoute: ReferencesRoute,
+  ReportingRoute: ReportingRoute,
+  SettingsRoute: SettingsRoute,
   SolutionsRoute: SolutionsRoute,
+  UsersRoute: UsersRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
