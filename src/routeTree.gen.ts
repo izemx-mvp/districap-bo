@@ -18,6 +18,8 @@ import { Route as OrdersRouteImport } from './routes/orders'
 import { Route as ProductsRouteImport } from './routes/products'
 import { Route as PromotionsRouteImport } from './routes/promotions'
 import { Route as QuotesRouteImport } from './routes/quotes'
+import { Route as ReferencesRouteImport } from './routes/references'
+import { Route as SolutionsRouteImport } from './routes/solutions'
 import { Route as ClientsIdRouteImport } from './routes/clients.$id'
 import { Route as OrdersIdRouteImport } from './routes/orders.$id'
 import { Route as ProductsIdRouteImport } from './routes/products.$id'
@@ -68,6 +70,16 @@ const QuotesRoute = QuotesRouteImport.update({
   path: '/quotes',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ReferencesRoute = ReferencesRouteImport.update({
+  id: '/references',
+  path: '/references',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SolutionsRoute = SolutionsRouteImport.update({
+  id: '/solutions',
+  path: '/solutions',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ClientsIdRoute = ClientsIdRouteImport.update({
   id: '/$id',
   path: '/$id',
@@ -99,6 +111,8 @@ export interface FileRoutesByFullPath {
   '/products': typeof ProductsRouteWithChildren
   '/promotions': typeof PromotionsRoute
   '/quotes': typeof QuotesRouteWithChildren
+  '/references': typeof ReferencesRoute
+  '/solutions': typeof SolutionsRoute
   '/clients/$id': typeof ClientsIdRoute
   '/orders/$id': typeof OrdersIdRoute
   '/products/$id': typeof ProductsIdRoute
@@ -114,6 +128,8 @@ export interface FileRoutesByTo {
   '/products': typeof ProductsRouteWithChildren
   '/promotions': typeof PromotionsRoute
   '/quotes': typeof QuotesRouteWithChildren
+  '/references': typeof ReferencesRoute
+  '/solutions': typeof SolutionsRoute
   '/clients/$id': typeof ClientsIdRoute
   '/orders/$id': typeof OrdersIdRoute
   '/products/$id': typeof ProductsIdRoute
@@ -130,6 +146,8 @@ export interface FileRoutesById {
   '/products': typeof ProductsRouteWithChildren
   '/promotions': typeof PromotionsRoute
   '/quotes': typeof QuotesRouteWithChildren
+  '/references': typeof ReferencesRoute
+  '/solutions': typeof SolutionsRoute
   '/clients/$id': typeof ClientsIdRoute
   '/orders/$id': typeof OrdersIdRoute
   '/products/$id': typeof ProductsIdRoute
@@ -147,6 +165,8 @@ export interface FileRouteTypes {
     | '/products'
     | '/promotions'
     | '/quotes'
+    | '/references'
+    | '/solutions'
     | '/clients/$id'
     | '/orders/$id'
     | '/products/$id'
@@ -162,6 +182,8 @@ export interface FileRouteTypes {
     | '/products'
     | '/promotions'
     | '/quotes'
+    | '/references'
+    | '/solutions'
     | '/clients/$id'
     | '/orders/$id'
     | '/products/$id'
@@ -177,6 +199,8 @@ export interface FileRouteTypes {
     | '/products'
     | '/promotions'
     | '/quotes'
+    | '/references'
+    | '/solutions'
     | '/clients/$id'
     | '/orders/$id'
     | '/products/$id'
@@ -193,6 +217,8 @@ export interface RootRouteChildren {
   ProductsRoute: typeof ProductsRouteWithChildren
   PromotionsRoute: typeof PromotionsRoute
   QuotesRoute: typeof QuotesRouteWithChildren
+  ReferencesRoute: typeof ReferencesRoute
+  SolutionsRoute: typeof SolutionsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -258,6 +284,20 @@ declare module '@tanstack/react-router' {
       path: '/quotes'
       fullPath: '/quotes'
       preLoaderRoute: typeof QuotesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/references': {
+      id: '/references'
+      path: '/references'
+      fullPath: '/references'
+      preLoaderRoute: typeof ReferencesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/solutions': {
+      id: '/solutions'
+      path: '/solutions'
+      fullPath: '/solutions'
+      preLoaderRoute: typeof SolutionsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/clients/$id': {
@@ -346,6 +386,8 @@ const rootRouteChildren: RootRouteChildren = {
   ProductsRoute: ProductsRouteWithChildren,
   PromotionsRoute: PromotionsRoute,
   QuotesRoute: QuotesRouteWithChildren,
+  ReferencesRoute: ReferencesRoute,
+  SolutionsRoute: SolutionsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
