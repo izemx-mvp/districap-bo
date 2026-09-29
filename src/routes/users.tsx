@@ -52,7 +52,7 @@ function UsersPage() {
   const [role, setRole] = useState<User["role"]>("Commercial");
   const [matrix, setMatrix] = useState<Record<string, boolean[]>>(() => {
     try {
-      return JSON.parse(String(store.settings.permissions ?? "{}")) as Record<string, boolean[]>;
+      return JSON.parse(String(store.settings["permissions"] ?? "{}")) as Record<string, boolean[]>;
     } catch {
       return {};
     }
