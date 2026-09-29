@@ -14,7 +14,9 @@ import { Route as BrandsRouteImport } from './routes/brands'
 import { Route as CategoriesRouteImport } from './routes/categories'
 import { Route as ClientsRouteImport } from './routes/clients'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as NewsRouteImport } from './routes/news'
 import { Route as OrdersRouteImport } from './routes/orders'
+import { Route as PagesRouteImport } from './routes/pages'
 import { Route as ProductsRouteImport } from './routes/products'
 import { Route as PromotionsRouteImport } from './routes/promotions'
 import { Route as QuotesRouteImport } from './routes/quotes'
@@ -50,9 +52,19 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const NewsRoute = NewsRouteImport.update({
+  id: '/news',
+  path: '/news',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const OrdersRoute = OrdersRouteImport.update({
   id: '/orders',
   path: '/orders',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PagesRoute = PagesRouteImport.update({
+  id: '/pages',
+  path: '/pages',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProductsRoute = ProductsRouteImport.update({
@@ -107,7 +119,9 @@ export interface FileRoutesByFullPath {
   '/categories': typeof CategoriesRoute
   '/clients': typeof ClientsRouteWithChildren
   '/login': typeof LoginRoute
+  '/news': typeof NewsRoute
   '/orders': typeof OrdersRouteWithChildren
+  '/pages': typeof PagesRoute
   '/products': typeof ProductsRouteWithChildren
   '/promotions': typeof PromotionsRoute
   '/quotes': typeof QuotesRouteWithChildren
@@ -124,7 +138,9 @@ export interface FileRoutesByTo {
   '/categories': typeof CategoriesRoute
   '/clients': typeof ClientsRouteWithChildren
   '/login': typeof LoginRoute
+  '/news': typeof NewsRoute
   '/orders': typeof OrdersRouteWithChildren
+  '/pages': typeof PagesRoute
   '/products': typeof ProductsRouteWithChildren
   '/promotions': typeof PromotionsRoute
   '/quotes': typeof QuotesRouteWithChildren
@@ -142,7 +158,9 @@ export interface FileRoutesById {
   '/categories': typeof CategoriesRoute
   '/clients': typeof ClientsRouteWithChildren
   '/login': typeof LoginRoute
+  '/news': typeof NewsRoute
   '/orders': typeof OrdersRouteWithChildren
+  '/pages': typeof PagesRoute
   '/products': typeof ProductsRouteWithChildren
   '/promotions': typeof PromotionsRoute
   '/quotes': typeof QuotesRouteWithChildren
@@ -161,7 +179,9 @@ export interface FileRouteTypes {
     | '/categories'
     | '/clients'
     | '/login'
+    | '/news'
     | '/orders'
+    | '/pages'
     | '/products'
     | '/promotions'
     | '/quotes'
@@ -178,7 +198,9 @@ export interface FileRouteTypes {
     | '/categories'
     | '/clients'
     | '/login'
+    | '/news'
     | '/orders'
+    | '/pages'
     | '/products'
     | '/promotions'
     | '/quotes'
@@ -195,7 +217,9 @@ export interface FileRouteTypes {
     | '/categories'
     | '/clients'
     | '/login'
+    | '/news'
     | '/orders'
+    | '/pages'
     | '/products'
     | '/promotions'
     | '/quotes'
@@ -213,7 +237,9 @@ export interface RootRouteChildren {
   CategoriesRoute: typeof CategoriesRoute
   ClientsRoute: typeof ClientsRouteWithChildren
   LoginRoute: typeof LoginRoute
+  NewsRoute: typeof NewsRoute
   OrdersRoute: typeof OrdersRouteWithChildren
+  PagesRoute: typeof PagesRoute
   ProductsRoute: typeof ProductsRouteWithChildren
   PromotionsRoute: typeof PromotionsRoute
   QuotesRoute: typeof QuotesRouteWithChildren
@@ -258,11 +284,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/news': {
+      id: '/news'
+      path: '/news'
+      fullPath: '/news'
+      preLoaderRoute: typeof NewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/orders': {
       id: '/orders'
       path: '/orders'
       fullPath: '/orders'
       preLoaderRoute: typeof OrdersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pages': {
+      id: '/pages'
+      path: '/pages'
+      fullPath: '/pages'
+      preLoaderRoute: typeof PagesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/products': {
@@ -382,7 +422,9 @@ const rootRouteChildren: RootRouteChildren = {
   CategoriesRoute: CategoriesRoute,
   ClientsRoute: ClientsRouteWithChildren,
   LoginRoute: LoginRoute,
+  NewsRoute: NewsRoute,
   OrdersRoute: OrdersRouteWithChildren,
+  PagesRoute: PagesRoute,
   ProductsRoute: ProductsRouteWithChildren,
   PromotionsRoute: PromotionsRoute,
   QuotesRoute: QuotesRouteWithChildren,
