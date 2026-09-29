@@ -330,7 +330,7 @@ export const categories: Category[] = [
   { id: "c8", name: "Accessoires", parentId: null, description: "Supports, câbles et consommables.", icon: "Cable", order: 8, status: "actif", seoTitle: "Accessoires AV", seoDescription: "Accessoires et câblage.", slug: "accessoires" },
 ];
 
-const productSeed: [string, string, string, string, number, number | null, Product["stock"], boolean][] = [
+const productSeed: [string, string, string | null, string, number, number | null, Product["stock"], boolean][] = [
   ["Rally Bar Mini", "c1", "c1a", "br1", 32900, 35900, "en stock", true],
   ["Rally Bar Huddle", "c1", "c1a", "br1", 18500, null, "en stock", false],
   ["MeetUp 2", "c1", "c1a", "br1", 12900, 14200, "en stock", true],
