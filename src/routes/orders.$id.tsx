@@ -1,3 +1,4 @@
+import { exportCSV } from "@/lib/export";
 import { useState } from "react";
 import { createFileRoute, useNavigate, useParams } from "@tanstack/react-router";
 import { ArrowLeft, Check, Download, Printer, X } from "lucide-react";
@@ -82,7 +83,7 @@ function OrderDetail() {
             <Button variant="outline" onClick={() => window.print()}>
               <Printer className="size-4" /> Imprimer
             </Button>
-            <Button variant="outline" onClick={() => toast.success("Commande exportée en PDF")}>
+            <Button variant="outline" onClick={() => exportCSV(`commande-${order.number}`, order.items.map((i) => ({ commande: order.number, client: order.clientName, ...i, total: i.qty * i.unitPrice })), "Commande exportée")}>
               <Download className="size-4" /> Exporter
             </Button>
             <Button variant="outline" onClick={() => setStatus("Annulée")}>

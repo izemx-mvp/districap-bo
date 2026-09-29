@@ -1,3 +1,4 @@
+import { exportCSV } from "@/lib/export";
 import { useState } from "react";
 import { createFileRoute } from "@tanstack/react-router";
 import { FolderOpen, Grid2x2, List, Search, Trash2, Upload } from "lucide-react";
@@ -155,7 +156,7 @@ function MediaPage() {
                 <div><dt className="text-muted-foreground">Utilisé dans</dt><dd>{detail.usedIn}</dd></div>
               </dl>
               <div className="flex gap-2">
-                <Button variant="outline" className="flex-1" onClick={() => toast.success("Lien du média copié")}>Copier le lien</Button>
+                <Button variant="outline" className="flex-1" onClick={() => { navigator.clipboard?.writeText(`${window.location.origin}/media/${encodeURIComponent(String(detail?.name ?? ""))}`).then(() => toast.success("Lien du média copié"), () => toast.error("Copie impossible")); }}>Copier le lien</Button>
                 <Button
                   variant="outline"
                   className="flex-1"

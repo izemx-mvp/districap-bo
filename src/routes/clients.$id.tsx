@@ -1,3 +1,4 @@
+import { exportCSV } from "@/lib/export";
 import { useState } from "react";
 import { createFileRoute, useNavigate, useParams } from "@tanstack/react-router";
 import { ArrowLeft, Download, Power } from "lucide-react";
@@ -70,7 +71,7 @@ function ClientDetail() {
             >
               <Power className="size-4" /> {client.status === "actif" ? "Désactiver" : "Activer"}
             </Button>
-            <Button variant="outline" onClick={() => toast.success("Fiche client exportée")}>
+            <Button variant="outline" onClick={() => exportCSV(`client-${client.id}`, [{ ...client, commandes: clientOrders.length, devis: clientQuotes.length }], "Fiche client exportée")}>
               <Download className="size-4" /> Exporter
             </Button>
           </>

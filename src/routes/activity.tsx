@@ -1,3 +1,4 @@
+import { exportCSV } from "@/lib/export";
 import { useState } from "react";
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { Download, Search } from "lucide-react";
@@ -49,7 +50,7 @@ function ActivityPage() {
         title="Journal d'activité"
         description={`${store.activity.length} actions enregistrées sur les deux plateformes.`}
         actions={
-          <Button variant="outline" onClick={() => toast.success("Journal exporté au format CSV")}>
+          <Button variant="outline" onClick={() => exportCSV("journal-activite", rows, "Journal exporté au format CSV")}>
             <Download className="size-4" /> Exporter
           </Button>
         }
