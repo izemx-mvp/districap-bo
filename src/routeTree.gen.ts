@@ -10,13 +10,48 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BannersRouteImport } from './routes/banners'
+import { Route as BrandsRouteImport } from './routes/brands'
+import { Route as CategoriesRouteImport } from './routes/categories'
+import { Route as ClientsRouteImport } from './routes/clients'
 import { Route as LoginRouteImport } from './routes/login'
+import { Route as MediaRouteImport } from './routes/media'
+import { Route as NewsRouteImport } from './routes/news'
+import { Route as OrdersRouteImport } from './routes/orders'
+import { Route as PagesRouteImport } from './routes/pages'
 import { Route as ProductsRouteImport } from './routes/products'
+import { Route as PromotionsRouteImport } from './routes/promotions'
+import { Route as QuotesRouteImport } from './routes/quotes'
+import { Route as ReferencesRouteImport } from './routes/references'
+import { Route as SolutionsRouteImport } from './routes/solutions'
+import { Route as ClientsIdRouteImport } from './routes/clients.$id'
+import { Route as OrdersIdRouteImport } from './routes/orders.$id'
 import { Route as ProductsIdRouteImport } from './routes/products.$id'
+import { Route as QuotesIdRouteImport } from './routes/quotes.$id'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BannersRoute = BannersRouteImport.update({
+  id: '/banners',
+  path: '/banners',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BrandsRoute = BrandsRouteImport.update({
+  id: '/brands',
+  path: '/brands',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CategoriesRoute = CategoriesRouteImport.update({
+  id: '/categories',
+  path: '/categories',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ClientsRoute = ClientsRouteImport.update({
+  id: '/clients',
+  path: '/clients',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -24,48 +59,218 @@ const LoginRoute = LoginRouteImport.update({
   path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
+const MediaRoute = MediaRouteImport.update({
+  id: '/media',
+  path: '/media',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewsRoute = NewsRouteImport.update({
+  id: '/news',
+  path: '/news',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const OrdersRoute = OrdersRouteImport.update({
+  id: '/orders',
+  path: '/orders',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PagesRoute = PagesRouteImport.update({
+  id: '/pages',
+  path: '/pages',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProductsRoute = ProductsRouteImport.update({
   id: '/products',
   path: '/products',
   getParentRoute: () => rootRouteImport,
+} as any)
+const PromotionsRoute = PromotionsRouteImport.update({
+  id: '/promotions',
+  path: '/promotions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const QuotesRoute = QuotesRouteImport.update({
+  id: '/quotes',
+  path: '/quotes',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ReferencesRoute = ReferencesRouteImport.update({
+  id: '/references',
+  path: '/references',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SolutionsRoute = SolutionsRouteImport.update({
+  id: '/solutions',
+  path: '/solutions',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ClientsIdRoute = ClientsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => ClientsRoute,
+} as any)
+const OrdersIdRoute = OrdersIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => OrdersRoute,
 } as any)
 const ProductsIdRoute = ProductsIdRouteImport.update({
   id: '/$id',
   path: '/$id',
   getParentRoute: () => ProductsRoute,
 } as any)
+const QuotesIdRoute = QuotesIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => QuotesRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/banners': typeof BannersRoute
+  '/brands': typeof BrandsRoute
+  '/categories': typeof CategoriesRoute
+  '/clients': typeof ClientsRouteWithChildren
   '/login': typeof LoginRoute
+  '/media': typeof MediaRoute
+  '/news': typeof NewsRoute
+  '/orders': typeof OrdersRouteWithChildren
+  '/pages': typeof PagesRoute
   '/products': typeof ProductsRouteWithChildren
+  '/promotions': typeof PromotionsRoute
+  '/quotes': typeof QuotesRouteWithChildren
+  '/references': typeof ReferencesRoute
+  '/solutions': typeof SolutionsRoute
+  '/clients/$id': typeof ClientsIdRoute
+  '/orders/$id': typeof OrdersIdRoute
   '/products/$id': typeof ProductsIdRoute
+  '/quotes/$id': typeof QuotesIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/banners': typeof BannersRoute
+  '/brands': typeof BrandsRoute
+  '/categories': typeof CategoriesRoute
+  '/clients': typeof ClientsRouteWithChildren
   '/login': typeof LoginRoute
+  '/media': typeof MediaRoute
+  '/news': typeof NewsRoute
+  '/orders': typeof OrdersRouteWithChildren
+  '/pages': typeof PagesRoute
   '/products': typeof ProductsRouteWithChildren
+  '/promotions': typeof PromotionsRoute
+  '/quotes': typeof QuotesRouteWithChildren
+  '/references': typeof ReferencesRoute
+  '/solutions': typeof SolutionsRoute
+  '/clients/$id': typeof ClientsIdRoute
+  '/orders/$id': typeof OrdersIdRoute
   '/products/$id': typeof ProductsIdRoute
+  '/quotes/$id': typeof QuotesIdRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/banners': typeof BannersRoute
+  '/brands': typeof BrandsRoute
+  '/categories': typeof CategoriesRoute
+  '/clients': typeof ClientsRouteWithChildren
   '/login': typeof LoginRoute
+  '/media': typeof MediaRoute
+  '/news': typeof NewsRoute
+  '/orders': typeof OrdersRouteWithChildren
+  '/pages': typeof PagesRoute
   '/products': typeof ProductsRouteWithChildren
+  '/promotions': typeof PromotionsRoute
+  '/quotes': typeof QuotesRouteWithChildren
+  '/references': typeof ReferencesRoute
+  '/solutions': typeof SolutionsRoute
+  '/clients/$id': typeof ClientsIdRoute
+  '/orders/$id': typeof OrdersIdRoute
   '/products/$id': typeof ProductsIdRoute
+  '/quotes/$id': typeof QuotesIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/products' | '/products/$id'
+  fullPaths:
+    | '/'
+    | '/banners'
+    | '/brands'
+    | '/categories'
+    | '/clients'
+    | '/login'
+    | '/media'
+    | '/news'
+    | '/orders'
+    | '/pages'
+    | '/products'
+    | '/promotions'
+    | '/quotes'
+    | '/references'
+    | '/solutions'
+    | '/clients/$id'
+    | '/orders/$id'
+    | '/products/$id'
+    | '/quotes/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/login' | '/products' | '/products/$id'
-  id: '__root__' | '/' | '/login' | '/products' | '/products/$id'
+  to:
+    | '/'
+    | '/banners'
+    | '/brands'
+    | '/categories'
+    | '/clients'
+    | '/login'
+    | '/media'
+    | '/news'
+    | '/orders'
+    | '/pages'
+    | '/products'
+    | '/promotions'
+    | '/quotes'
+    | '/references'
+    | '/solutions'
+    | '/clients/$id'
+    | '/orders/$id'
+    | '/products/$id'
+    | '/quotes/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/banners'
+    | '/brands'
+    | '/categories'
+    | '/clients'
+    | '/login'
+    | '/media'
+    | '/news'
+    | '/orders'
+    | '/pages'
+    | '/products'
+    | '/promotions'
+    | '/quotes'
+    | '/references'
+    | '/solutions'
+    | '/clients/$id'
+    | '/orders/$id'
+    | '/products/$id'
+    | '/quotes/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BannersRoute: typeof BannersRoute
+  BrandsRoute: typeof BrandsRoute
+  CategoriesRoute: typeof CategoriesRoute
+  ClientsRoute: typeof ClientsRouteWithChildren
   LoginRoute: typeof LoginRoute
+  MediaRoute: typeof MediaRoute
+  NewsRoute: typeof NewsRoute
+  OrdersRoute: typeof OrdersRouteWithChildren
+  PagesRoute: typeof PagesRoute
   ProductsRoute: typeof ProductsRouteWithChildren
+  PromotionsRoute: typeof PromotionsRoute
+  QuotesRoute: typeof QuotesRouteWithChildren
+  ReferencesRoute: typeof ReferencesRoute
+  SolutionsRoute: typeof SolutionsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -77,11 +282,67 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/banners': {
+      id: '/banners'
+      path: '/banners'
+      fullPath: '/banners'
+      preLoaderRoute: typeof BannersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/brands': {
+      id: '/brands'
+      path: '/brands'
+      fullPath: '/brands'
+      preLoaderRoute: typeof BrandsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/categories': {
+      id: '/categories'
+      path: '/categories'
+      fullPath: '/categories'
+      preLoaderRoute: typeof CategoriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/clients': {
+      id: '/clients'
+      path: '/clients'
+      fullPath: '/clients'
+      preLoaderRoute: typeof ClientsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/login': {
       id: '/login'
       path: '/login'
       fullPath: '/login'
       preLoaderRoute: typeof LoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/media': {
+      id: '/media'
+      path: '/media'
+      fullPath: '/media'
+      preLoaderRoute: typeof MediaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/news': {
+      id: '/news'
+      path: '/news'
+      fullPath: '/news'
+      preLoaderRoute: typeof NewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/orders': {
+      id: '/orders'
+      path: '/orders'
+      fullPath: '/orders'
+      preLoaderRoute: typeof OrdersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pages': {
+      id: '/pages'
+      path: '/pages'
+      fullPath: '/pages'
+      preLoaderRoute: typeof PagesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/products': {
@@ -91,6 +352,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/promotions': {
+      id: '/promotions'
+      path: '/promotions'
+      fullPath: '/promotions'
+      preLoaderRoute: typeof PromotionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/quotes': {
+      id: '/quotes'
+      path: '/quotes'
+      fullPath: '/quotes'
+      preLoaderRoute: typeof QuotesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/references': {
+      id: '/references'
+      path: '/references'
+      fullPath: '/references'
+      preLoaderRoute: typeof ReferencesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/solutions': {
+      id: '/solutions'
+      path: '/solutions'
+      fullPath: '/solutions'
+      preLoaderRoute: typeof SolutionsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/clients/$id': {
+      id: '/clients/$id'
+      path: '/$id'
+      fullPath: '/clients/$id'
+      preLoaderRoute: typeof ClientsIdRouteImport
+      parentRoute: typeof ClientsRoute
+    }
+    '/orders/$id': {
+      id: '/orders/$id'
+      path: '/$id'
+      fullPath: '/orders/$id'
+      preLoaderRoute: typeof OrdersIdRouteImport
+      parentRoute: typeof OrdersRoute
+    }
     '/products/$id': {
       id: '/products/$id'
       path: '/$id'
@@ -98,8 +401,37 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductsIdRouteImport
       parentRoute: typeof ProductsRoute
     }
+    '/quotes/$id': {
+      id: '/quotes/$id'
+      path: '/$id'
+      fullPath: '/quotes/$id'
+      preLoaderRoute: typeof QuotesIdRouteImport
+      parentRoute: typeof QuotesRoute
+    }
   }
 }
+
+interface ClientsRouteChildren {
+  ClientsIdRoute: typeof ClientsIdRoute
+}
+
+const ClientsRouteChildren: ClientsRouteChildren = {
+  ClientsIdRoute: ClientsIdRoute,
+}
+
+const ClientsRouteWithChildren =
+  ClientsRoute._addFileChildren(ClientsRouteChildren)
+
+interface OrdersRouteChildren {
+  OrdersIdRoute: typeof OrdersIdRoute
+}
+
+const OrdersRouteChildren: OrdersRouteChildren = {
+  OrdersIdRoute: OrdersIdRoute,
+}
+
+const OrdersRouteWithChildren =
+  OrdersRoute._addFileChildren(OrdersRouteChildren)
 
 interface ProductsRouteChildren {
   ProductsIdRoute: typeof ProductsIdRoute
@@ -113,10 +445,33 @@ const ProductsRouteWithChildren = ProductsRoute._addFileChildren(
   ProductsRouteChildren,
 )
 
+interface QuotesRouteChildren {
+  QuotesIdRoute: typeof QuotesIdRoute
+}
+
+const QuotesRouteChildren: QuotesRouteChildren = {
+  QuotesIdRoute: QuotesIdRoute,
+}
+
+const QuotesRouteWithChildren =
+  QuotesRoute._addFileChildren(QuotesRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BannersRoute: BannersRoute,
+  BrandsRoute: BrandsRoute,
+  CategoriesRoute: CategoriesRoute,
+  ClientsRoute: ClientsRouteWithChildren,
   LoginRoute: LoginRoute,
+  MediaRoute: MediaRoute,
+  NewsRoute: NewsRoute,
+  OrdersRoute: OrdersRouteWithChildren,
+  PagesRoute: PagesRoute,
   ProductsRoute: ProductsRouteWithChildren,
+  PromotionsRoute: PromotionsRoute,
+  QuotesRoute: QuotesRouteWithChildren,
+  ReferencesRoute: ReferencesRoute,
+  SolutionsRoute: SolutionsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
