@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ActivityRouteImport } from './routes/activity'
 import { Route as BannersRouteImport } from './routes/banners'
 import { Route as BrandsRouteImport } from './routes/brands'
 import { Route as CategoriesRouteImport } from './routes/categories'
@@ -19,6 +20,7 @@ import { Route as FormsRouteImport } from './routes/forms'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as MediaRouteImport } from './routes/media'
 import { Route as NewsRouteImport } from './routes/news'
+import { Route as NewsletterRouteImport } from './routes/newsletter'
 import { Route as OrdersRouteImport } from './routes/orders'
 import { Route as PagesRouteImport } from './routes/pages'
 import { Route as ProductsRouteImport } from './routes/products'
@@ -34,6 +36,11 @@ import { Route as QuotesIdRouteImport } from './routes/quotes.$id'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ActivityRoute = ActivityRouteImport.update({
+  id: '/activity',
+  path: '/activity',
   getParentRoute: () => rootRouteImport,
 } as any)
 const BannersRoute = BannersRouteImport.update({
@@ -79,6 +86,11 @@ const MediaRoute = MediaRouteImport.update({
 const NewsRoute = NewsRouteImport.update({
   id: '/news',
   path: '/news',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const NewsletterRoute = NewsletterRouteImport.update({
+  id: '/newsletter',
+  path: '/newsletter',
   getParentRoute: () => rootRouteImport,
 } as any)
 const OrdersRoute = OrdersRouteImport.update({
@@ -139,6 +151,7 @@ const QuotesIdRoute = QuotesIdRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/activity': typeof ActivityRoute
   '/banners': typeof BannersRoute
   '/brands': typeof BrandsRoute
   '/categories': typeof CategoriesRoute
@@ -148,6 +161,7 @@ export interface FileRoutesByFullPath {
   '/login': typeof LoginRoute
   '/media': typeof MediaRoute
   '/news': typeof NewsRoute
+  '/newsletter': typeof NewsletterRoute
   '/orders': typeof OrdersRouteWithChildren
   '/pages': typeof PagesRoute
   '/products': typeof ProductsRouteWithChildren
@@ -162,6 +176,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/activity': typeof ActivityRoute
   '/banners': typeof BannersRoute
   '/brands': typeof BrandsRoute
   '/categories': typeof CategoriesRoute
@@ -171,6 +186,7 @@ export interface FileRoutesByTo {
   '/login': typeof LoginRoute
   '/media': typeof MediaRoute
   '/news': typeof NewsRoute
+  '/newsletter': typeof NewsletterRoute
   '/orders': typeof OrdersRouteWithChildren
   '/pages': typeof PagesRoute
   '/products': typeof ProductsRouteWithChildren
@@ -186,6 +202,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/activity': typeof ActivityRoute
   '/banners': typeof BannersRoute
   '/brands': typeof BrandsRoute
   '/categories': typeof CategoriesRoute
@@ -195,6 +212,7 @@ export interface FileRoutesById {
   '/login': typeof LoginRoute
   '/media': typeof MediaRoute
   '/news': typeof NewsRoute
+  '/newsletter': typeof NewsletterRoute
   '/orders': typeof OrdersRouteWithChildren
   '/pages': typeof PagesRoute
   '/products': typeof ProductsRouteWithChildren
@@ -211,6 +229,7 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/activity'
     | '/banners'
     | '/brands'
     | '/categories'
@@ -220,6 +239,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/media'
     | '/news'
+    | '/newsletter'
     | '/orders'
     | '/pages'
     | '/products'
@@ -234,6 +254,7 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/activity'
     | '/banners'
     | '/brands'
     | '/categories'
@@ -243,6 +264,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/media'
     | '/news'
+    | '/newsletter'
     | '/orders'
     | '/pages'
     | '/products'
@@ -257,6 +279,7 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/activity'
     | '/banners'
     | '/brands'
     | '/categories'
@@ -266,6 +289,7 @@ export interface FileRouteTypes {
     | '/login'
     | '/media'
     | '/news'
+    | '/newsletter'
     | '/orders'
     | '/pages'
     | '/products'
@@ -281,6 +305,7 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  ActivityRoute: typeof ActivityRoute
   BannersRoute: typeof BannersRoute
   BrandsRoute: typeof BrandsRoute
   CategoriesRoute: typeof CategoriesRoute
@@ -290,6 +315,7 @@ export interface RootRouteChildren {
   LoginRoute: typeof LoginRoute
   MediaRoute: typeof MediaRoute
   NewsRoute: typeof NewsRoute
+  NewsletterRoute: typeof NewsletterRoute
   OrdersRoute: typeof OrdersRouteWithChildren
   PagesRoute: typeof PagesRoute
   ProductsRoute: typeof ProductsRouteWithChildren
@@ -306,6 +332,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/activity': {
+      id: '/activity'
+      path: '/activity'
+      fullPath: '/activity'
+      preLoaderRoute: typeof ActivityRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/banners': {
@@ -369,6 +402,13 @@ declare module '@tanstack/react-router' {
       path: '/news'
       fullPath: '/news'
       preLoaderRoute: typeof NewsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/newsletter': {
+      id: '/newsletter'
+      path: '/newsletter'
+      fullPath: '/newsletter'
+      preLoaderRoute: typeof NewsletterRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/orders': {
@@ -498,6 +538,7 @@ const QuotesRouteWithChildren =
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  ActivityRoute: ActivityRoute,
   BannersRoute: BannersRoute,
   BrandsRoute: BrandsRoute,
   CategoriesRoute: CategoriesRoute,
@@ -507,6 +548,7 @@ const rootRouteChildren: RootRouteChildren = {
   LoginRoute: LoginRoute,
   MediaRoute: MediaRoute,
   NewsRoute: NewsRoute,
+  NewsletterRoute: NewsletterRoute,
   OrdersRoute: OrdersRouteWithChildren,
   PagesRoute: PagesRoute,
   ProductsRoute: ProductsRouteWithChildren,
