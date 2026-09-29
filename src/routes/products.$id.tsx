@@ -75,12 +75,42 @@ function ProductForm() {
   const set = (patch: Partial<Product>) => setForm((f) => ({ ...f, ...patch }));
 
   const persist = (status?: Product["status"], message = "Produit enregistré") => {
-    const payload = { ...form, ...(status ? { status } : {}), updatedAt: new Date().toISOString().slice(0, 10) };
-    if (existing) store.update("products", form.id, payload);
+    if (!form.name.trim()) {
+      toast.error("Le nom du produit est obligatoire");
+      return null;
+    }
+    if (!form.ref.trim()) {
+      toast.error("La référence est obligatoire");
+      return null;
+    }
+    if (!(form.price >= 0) || Number.isNaN(form.price)) {
+      toast.error("Le prix doit être un nombre positif");
+      return null;
+    }
+    if ((status ?? form.status) === "actif" && form.price <= 0) {
+      toast.error("Renseignez un prix avant de publier le produit");
+      return null;
+    }
+    if (store.products.some((p) => p.id !== form.id && p.ref.toLowerCase() === form.ref.trim().toLowerCase())) {
+      toast.error("Cette référence est déjà utilisée par un autre produit");
+      return null;
+    }
+    const alreadySaved = store.products.some((p) => p.id === form.id);
+    const payload = {
+      ...form,
+      name: form.name.trim(),
+      ref: form.ref.trim(),
+      slug: form.slug || form.name.trim().toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, ""),
+      specs: form.specs.filter((s) => s.key.trim() || s.value.trim()),
+      ...(status ? { status } : {}),
+      updatedAt: new Date().toISOString().slice(0, 10),
+    };
+    if (alreadySaved) store.update("products", form.id, payload);
     else store.add("products", payload);
-    setForm(payload);
-    store.logActivity(existing ? "a modifié le produit" : "a créé le produit", "Produits", payload.name || "Sans nom", "/products");
+    setForm(payload.specs.length ? payload : { ...payload, specs: [{ key: "", value: "" }] });
+    store.logActivity(alreadySaved ? "a modifié le produit" : "a créé le produit", "Produits", payload.name, `/products/${payload.id}`);
     toast.success(message);
+    if (!alreadySaved && id !== payload.id) navigate({ to: "/products/$id", params: { id: payload.id }, replace: true });
     return payload;
   };
 
@@ -112,8 +142,7 @@ function ProductForm() {
             <Button
               variant="outline"
               onClick={() => {
-                persist(undefined, "Enregistré");
-                navigate({ to: "/products" });
+                if (persist(undefined, "Enregistré")) navigate({ to: "/products" });
               }}
             >
               Enregistrer et quitter
@@ -419,6 +448,7 @@ function ProductForm() {
 
 function RelatedList({ items }: { items: string[] }) {
   const [list, setList] = useState(items);
+  const store = useStore();
   return (
     <div className="space-y-2">
       {list.length === 0 ? <p className="text-sm text-muted-foreground">Aucun produit associé.</p> : null}
@@ -430,9 +460,22 @@ function RelatedList({ items }: { items: string[] }) {
           </button>
         </div>
       ))}
-      <Button variant="outline" size="sm" className="w-full" onClick={() => toast.info("Sélectionnez un produit dans la liste")}>
-        <Plus className="size-4" /> Associer un produit
-      </Button>
+      <Select
+        value=""
+        onValueChange={(v) => {
+          setList((l) => [...l, v]);
+          toast.success(`${v} associé`);
+        }}
+      >
+        <SelectTrigger className="w-full">
+          <Plus className="size-4" /> <span>Associer un produit</span>
+        </SelectTrigger>
+        <SelectContent>
+          {store.products.filter((p) => p.name && !list.includes(p.name)).map((p) => (
+            <SelectItem key={p.id} value={p.name}>{p.name}</SelectItem>
+          ))}
+        </SelectContent>
+      </Select>
     </div>
   );
 }

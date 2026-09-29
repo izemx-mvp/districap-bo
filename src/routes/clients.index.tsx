@@ -27,7 +27,7 @@ import {
 import type { Client } from "@/lib/mock-data";
 import { formatDate, formatMAD, newId, useStore } from "@/lib/store";
 
-export const Route = createFileRoute("/clients")({
+export const Route = createFileRoute("/clients/")({
   head: () => ({
     meta: [
       { title: "Clients — Back-office DISTRICAP" },
