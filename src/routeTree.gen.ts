@@ -12,11 +12,13 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as BrandsRouteImport } from './routes/brands'
 import { Route as CategoriesRouteImport } from './routes/categories'
+import { Route as ClientsRouteImport } from './routes/clients'
 import { Route as LoginRouteImport } from './routes/login'
 import { Route as OrdersRouteImport } from './routes/orders'
 import { Route as ProductsRouteImport } from './routes/products'
 import { Route as PromotionsRouteImport } from './routes/promotions'
 import { Route as QuotesRouteImport } from './routes/quotes'
+import { Route as ClientsIdRouteImport } from './routes/clients.$id'
 import { Route as OrdersIdRouteImport } from './routes/orders.$id'
 import { Route as ProductsIdRouteImport } from './routes/products.$id'
 import { Route as QuotesIdRouteImport } from './routes/quotes.$id'
@@ -34,6 +36,11 @@ const BrandsRoute = BrandsRouteImport.update({
 const CategoriesRoute = CategoriesRouteImport.update({
   id: '/categories',
   path: '/categories',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ClientsRoute = ClientsRouteImport.update({
+  id: '/clients',
+  path: '/clients',
   getParentRoute: () => rootRouteImport,
 } as any)
 const LoginRoute = LoginRouteImport.update({
@@ -61,6 +68,11 @@ const QuotesRoute = QuotesRouteImport.update({
   path: '/quotes',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ClientsIdRoute = ClientsIdRouteImport.update({
+  id: '/$id',
+  path: '/$id',
+  getParentRoute: () => ClientsRoute,
+} as any)
 const OrdersIdRoute = OrdersIdRouteImport.update({
   id: '/$id',
   path: '/$id',
@@ -81,11 +93,13 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/brands': typeof BrandsRoute
   '/categories': typeof CategoriesRoute
+  '/clients': typeof ClientsRouteWithChildren
   '/login': typeof LoginRoute
   '/orders': typeof OrdersRouteWithChildren
   '/products': typeof ProductsRouteWithChildren
   '/promotions': typeof PromotionsRoute
   '/quotes': typeof QuotesRouteWithChildren
+  '/clients/$id': typeof ClientsIdRoute
   '/orders/$id': typeof OrdersIdRoute
   '/products/$id': typeof ProductsIdRoute
   '/quotes/$id': typeof QuotesIdRoute
@@ -94,11 +108,13 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/brands': typeof BrandsRoute
   '/categories': typeof CategoriesRoute
+  '/clients': typeof ClientsRouteWithChildren
   '/login': typeof LoginRoute
   '/orders': typeof OrdersRouteWithChildren
   '/products': typeof ProductsRouteWithChildren
   '/promotions': typeof PromotionsRoute
   '/quotes': typeof QuotesRouteWithChildren
+  '/clients/$id': typeof ClientsIdRoute
   '/orders/$id': typeof OrdersIdRoute
   '/products/$id': typeof ProductsIdRoute
   '/quotes/$id': typeof QuotesIdRoute
@@ -108,11 +124,13 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/brands': typeof BrandsRoute
   '/categories': typeof CategoriesRoute
+  '/clients': typeof ClientsRouteWithChildren
   '/login': typeof LoginRoute
   '/orders': typeof OrdersRouteWithChildren
   '/products': typeof ProductsRouteWithChildren
   '/promotions': typeof PromotionsRoute
   '/quotes': typeof QuotesRouteWithChildren
+  '/clients/$id': typeof ClientsIdRoute
   '/orders/$id': typeof OrdersIdRoute
   '/products/$id': typeof ProductsIdRoute
   '/quotes/$id': typeof QuotesIdRoute
@@ -123,11 +141,13 @@ export interface FileRouteTypes {
     | '/'
     | '/brands'
     | '/categories'
+    | '/clients'
     | '/login'
     | '/orders'
     | '/products'
     | '/promotions'
     | '/quotes'
+    | '/clients/$id'
     | '/orders/$id'
     | '/products/$id'
     | '/quotes/$id'
@@ -136,11 +156,13 @@ export interface FileRouteTypes {
     | '/'
     | '/brands'
     | '/categories'
+    | '/clients'
     | '/login'
     | '/orders'
     | '/products'
     | '/promotions'
     | '/quotes'
+    | '/clients/$id'
     | '/orders/$id'
     | '/products/$id'
     | '/quotes/$id'
@@ -149,11 +171,13 @@ export interface FileRouteTypes {
     | '/'
     | '/brands'
     | '/categories'
+    | '/clients'
     | '/login'
     | '/orders'
     | '/products'
     | '/promotions'
     | '/quotes'
+    | '/clients/$id'
     | '/orders/$id'
     | '/products/$id'
     | '/quotes/$id'
@@ -163,6 +187,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   BrandsRoute: typeof BrandsRoute
   CategoriesRoute: typeof CategoriesRoute
+  ClientsRoute: typeof ClientsRouteWithChildren
   LoginRoute: typeof LoginRoute
   OrdersRoute: typeof OrdersRouteWithChildren
   ProductsRoute: typeof ProductsRouteWithChildren
@@ -191,6 +216,13 @@ declare module '@tanstack/react-router' {
       path: '/categories'
       fullPath: '/categories'
       preLoaderRoute: typeof CategoriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/clients': {
+      id: '/clients'
+      path: '/clients'
+      fullPath: '/clients'
+      preLoaderRoute: typeof ClientsRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/login': {
@@ -228,6 +260,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof QuotesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/clients/$id': {
+      id: '/clients/$id'
+      path: '/$id'
+      fullPath: '/clients/$id'
+      preLoaderRoute: typeof ClientsIdRouteImport
+      parentRoute: typeof ClientsRoute
+    }
     '/orders/$id': {
       id: '/orders/$id'
       path: '/$id'
@@ -251,6 +290,17 @@ declare module '@tanstack/react-router' {
     }
   }
 }
+
+interface ClientsRouteChildren {
+  ClientsIdRoute: typeof ClientsIdRoute
+}
+
+const ClientsRouteChildren: ClientsRouteChildren = {
+  ClientsIdRoute: ClientsIdRoute,
+}
+
+const ClientsRouteWithChildren =
+  ClientsRoute._addFileChildren(ClientsRouteChildren)
 
 interface OrdersRouteChildren {
   OrdersIdRoute: typeof OrdersIdRoute
@@ -290,6 +340,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   BrandsRoute: BrandsRoute,
   CategoriesRoute: CategoriesRoute,
+  ClientsRoute: ClientsRouteWithChildren,
   LoginRoute: LoginRoute,
   OrdersRoute: OrdersRouteWithChildren,
   ProductsRoute: ProductsRouteWithChildren,
