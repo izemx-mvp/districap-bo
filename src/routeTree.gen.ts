@@ -21,7 +21,6 @@ import { Route as MediaRouteImport } from './routes/media'
 import { Route as NewsRouteImport } from './routes/news'
 import { Route as NewsletterRouteImport } from './routes/newsletter'
 import { Route as NotificationsRouteImport } from './routes/notifications'
-import { Route as PagesRouteImport } from './routes/pages'
 import { Route as PromotionsRouteImport } from './routes/promotions'
 import { Route as ReferencesRouteImport } from './routes/references'
 import { Route as ReportingRouteImport } from './routes/reporting'
@@ -95,11 +94,6 @@ const NewsletterRoute = NewsletterRouteImport.update({
 const NotificationsRoute = NotificationsRouteImport.update({
   id: '/notifications',
   path: '/notifications',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PagesRoute = PagesRouteImport.update({
-  id: '/pages',
-  path: '/pages',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PromotionsRoute = PromotionsRouteImport.update({
@@ -186,7 +180,6 @@ export interface FileRoutesByFullPath {
   '/news': typeof NewsRoute
   '/newsletter': typeof NewsletterRoute
   '/notifications': typeof NotificationsRoute
-  '/pages': typeof PagesRoute
   '/promotions': typeof PromotionsRoute
   '/references': typeof ReferencesRoute
   '/reporting': typeof ReportingRoute
@@ -215,7 +208,6 @@ export interface FileRoutesByTo {
   '/news': typeof NewsRoute
   '/newsletter': typeof NewsletterRoute
   '/notifications': typeof NotificationsRoute
-  '/pages': typeof PagesRoute
   '/promotions': typeof PromotionsRoute
   '/references': typeof ReferencesRoute
   '/reporting': typeof ReportingRoute
@@ -245,7 +237,6 @@ export interface FileRoutesById {
   '/news': typeof NewsRoute
   '/newsletter': typeof NewsletterRoute
   '/notifications': typeof NotificationsRoute
-  '/pages': typeof PagesRoute
   '/promotions': typeof PromotionsRoute
   '/references': typeof ReferencesRoute
   '/reporting': typeof ReportingRoute
@@ -276,7 +267,6 @@ export interface FileRouteTypes {
     | '/news'
     | '/newsletter'
     | '/notifications'
-    | '/pages'
     | '/promotions'
     | '/references'
     | '/reporting'
@@ -305,7 +295,6 @@ export interface FileRouteTypes {
     | '/news'
     | '/newsletter'
     | '/notifications'
-    | '/pages'
     | '/promotions'
     | '/references'
     | '/reporting'
@@ -334,7 +323,6 @@ export interface FileRouteTypes {
     | '/news'
     | '/newsletter'
     | '/notifications'
-    | '/pages'
     | '/promotions'
     | '/references'
     | '/reporting'
@@ -364,7 +352,6 @@ export interface RootRouteChildren {
   NewsRoute: typeof NewsRoute
   NewsletterRoute: typeof NewsletterRoute
   NotificationsRoute: typeof NotificationsRoute
-  PagesRoute: typeof PagesRoute
   PromotionsRoute: typeof PromotionsRoute
   ReferencesRoute: typeof ReferencesRoute
   ReportingRoute: typeof ReportingRoute
@@ -465,13 +452,6 @@ declare module '@tanstack/react-router' {
       path: '/notifications'
       fullPath: '/notifications'
       preLoaderRoute: typeof NotificationsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/pages': {
-      id: '/pages'
-      path: '/pages'
-      fullPath: '/pages'
-      preLoaderRoute: typeof PagesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/promotions': {
@@ -588,7 +568,6 @@ const rootRouteChildren: RootRouteChildren = {
   NewsRoute: NewsRoute,
   NewsletterRoute: NewsletterRoute,
   NotificationsRoute: NotificationsRoute,
-  PagesRoute: PagesRoute,
   PromotionsRoute: PromotionsRoute,
   ReferencesRoute: ReferencesRoute,
   ReportingRoute: ReportingRoute,

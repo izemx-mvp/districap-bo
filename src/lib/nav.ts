@@ -12,7 +12,6 @@ import {
   Gauge,
   Images,
   Inbox,
-  LayoutTemplate,
   Layers,
   Lightbulb,
   Mail,
@@ -70,7 +69,6 @@ export const navGroups: NavGroup[] = [
     items: [
       { label: "Solutions", href: "/solutions", icon: Lightbulb },
       { label: "Références", href: "/references", icon: Trophy },
-      { label: "Pages", href: "/pages", icon: LayoutTemplate },
       { label: "Actualités", href: "/news", icon: Newspaper },
     ],
   },

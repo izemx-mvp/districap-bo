@@ -19,7 +19,6 @@ type Collections = {
   clients: data.Client[];
   solutions: data.Solution[];
   references: data.Reference[];
-  sitePages: data.SitePage[];
   news: data.NewsItem[];
   banners: data.Banner[];
   media: data.MediaItem[];
@@ -42,7 +41,6 @@ const initial = (): Collections => ({
   clients: data.clients,
   solutions: data.solutions,
   references: data.references,
-  sitePages: data.sitePages,
   news: data.news,
   banners: data.banners,
   media: data.media,

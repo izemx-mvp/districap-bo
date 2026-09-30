@@ -166,24 +166,6 @@ export interface Reference {
   featured: boolean;
 }
 
-export interface PageBlock {
-  id: string;
-  type: string;
-  label: string;
-  enabled: boolean;
-}
-
-export interface SitePage {
-  id: string;
-  title: string;
-  slug: string;
-  status: Status;
-  updatedAt: string;
-  seoTitle: string;
-  seoDescription: string;
-  blocks: PageBlock[];
-}
-
 export interface NewsItem {
   id: string;
   title: string;
@@ -699,34 +681,6 @@ export const references: Reference[] = refSeed.map(([name, client, sector, city,
   featured: i < 3,
 }));
 
-export const sitePages: SitePage[] = [
-  {
-    id: "pg1",
-    title: "Accueil",
-    slug: "/",
-    status: "actif",
-    updatedAt: "2026-09-22",
-    seoTitle: "DISTRICAP — Distributeur de solutions audiovisuelles et sûreté",
-    seoDescription: "DISTRICAP distribue et intègre les solutions AV, sûreté et réseau pour les professionnels.",
-    blocks: [
-      { id: "b1", type: "hero", label: "Hero principal", enabled: true },
-      { id: "b2", type: "intro", label: "Présentation DISTRICAP", enabled: true },
-      { id: "b3", type: "stats", label: "Chiffres clés", enabled: true },
-      { id: "b4", type: "solutions", label: "Nos solutions", enabled: true },
-      { id: "b5", type: "brands", label: "Marques partenaires", enabled: true },
-      { id: "b6", type: "references", label: "Références", enabled: true },
-      { id: "b7", type: "advantages", label: "Nos avantages", enabled: true },
-      { id: "b8", type: "cta", label: "Appel à l'action", enabled: true },
-      { id: "b9", type: "contact", label: "Bloc contact", enabled: false },
-    ],
-  },
-  { id: "pg2", title: "À propos", slug: "/a-propos", status: "actif", updatedAt: "2026-08-30", seoTitle: "À propos de DISTRICAP", seoDescription: "Notre histoire, nos équipes et nos engagements.", blocks: [{ id: "b1", type: "hero", label: "Bandeau titre", enabled: true }, { id: "b2", type: "story", label: "Notre histoire", enabled: true }, { id: "b3", type: "team", label: "Équipe", enabled: true }] },
-  { id: "pg3", title: "Contact", slug: "/contact", status: "actif", updatedAt: "2026-09-12", seoTitle: "Contacter DISTRICAP", seoDescription: "Nos coordonnées et formulaire de contact.", blocks: [{ id: "b1", type: "map", label: "Carte et adresse", enabled: true }, { id: "b2", type: "form", label: "Formulaire de contact", enabled: true }] },
-  { id: "pg4", title: "Mentions légales", slug: "/mentions-legales", status: "actif", updatedAt: "2026-05-04", seoTitle: "Mentions légales", seoDescription: "Informations légales DISTRICAP.", blocks: [{ id: "b1", type: "text", label: "Contenu légal", enabled: true }] },
-  { id: "pg5", title: "Politique de confidentialité", slug: "/confidentialite", status: "actif", updatedAt: "2026-05-04", seoTitle: "Politique de confidentialité", seoDescription: "Traitement des données personnelles.", blocks: [{ id: "b1", type: "text", label: "Contenu RGPD", enabled: true }] },
-  { id: "pg6", title: "CGV", slug: "/cgv", status: "brouillon", updatedAt: "2026-09-18", seoTitle: "Conditions générales de vente", seoDescription: "CGV DISTRICAP.", blocks: [{ id: "b1", type: "text", label: "Conditions générales", enabled: true }] },
-];
-
 export const news: NewsItem[] = [
   { id: "n1", title: "DISTRICAP devient distributeur agréé Barco au Maroc", category: "Partenariat", author: "Salwa Ouali", date: "2026-09-18", status: "actif", excerpt: "Un nouvel accord qui renforce notre offre de collaboration sans fil et d'affichage haut de gamme.", views: 1240 },
   { id: "n2", title: "Retour sur l'équipement de 24 salles pour Atlas Industries", category: "Réalisation", author: "Karim Zeroual", date: "2026-09-05", status: "actif", excerpt: "Un déploiement en trois phases sans interruption de l'activité du site.", views: 860 },
@@ -829,7 +783,7 @@ export const users: User[] = [
 
 export const modules = [
   "Tableau de bord", "Produits", "Catégories", "Marques", "Promotions", "Commandes", "Devis", "Clients",
-  "Solutions", "Références", "Pages", "Actualités", "Bannières", "Médiathèque", "Documents", "Formulaires",
+  "Solutions", "Références", "Actualités", "Bannières", "Médiathèque", "Documents", "Formulaires",
   "Newsletter", "Reporting", "Utilisateurs", "Paramètres",
 ] as const;
 
